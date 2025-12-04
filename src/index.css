@@ -1,0 +1,20 @@
+/* src/index.css (Kunci Kerapian 1) */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    background-color: #f4f4f4; 
+    color: #333;
+}
+
+/* Memastikan App Container berada di tengah dan tidak meluber */
+#root {
+    display: flex;
+    justify-content: center;
+    width: 100%; 
+}

@@ -1,0 +1,192 @@
+/* src/KonfirmasiRelawanLangkah3.css */
+
+/* --- Variabel Global --- */
+:root {
+    --color-page-bg: #ffffff; 
+    --color-primary: #100e2f;
+    --color-secondary: #17143a; 
+    --color-accent-blue: #70baff; /* Warna Aksen Biru */
+    --color-light-blue: #b8dcfe; /* Warna Biru Muda */
+    --color-gray-bg: #e3e3e3; 
+    --color-text-gray: #676767;
+    --color-input-placeholder: #b9b3b3;
+    --color-white: #ffffff;
+    --color-black: #000000;
+}
+
+/* Base Layout */
+.confirmation-page-wrapper {
+    background: var(--color-page-bg);
+    min-height: 100vh;
+    padding-top: 127px; 
+}
+
+.content-area {
+    max-width: 1529px; 
+    margin: 0 auto;
+    padding: 0 40px 100px 40px; 
+}
+
+/* ---------------------------------------------------- */
+/* --- HEADER & JUDUL (Disesuaikan) --- */
+/* ---------------------------------------------------- */
+.main-header {
+    background: var(--color-primary);
+    padding: 10px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    position: fixed; 
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    height: 127px; 
+}
+/* ... (Styling header dan judul lainnya) ... */
+
+/* ---------------------------------------------------- */
+/* --- PROGRES LANGKAH --- */
+/* ---------------------------------------------------- */
+.progress-steps-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    background: var(--color-gray-bg); 
+    border-radius: 25px 25px 0px 0px;
+    padding: 30px 50px;
+    margin-top: 40px;
+    min-height: 150px;
+    align-items: center;
+}
+/* ... (Styling progress step) ... */
+
+
+/* ---------------------------------------------------- */
+/* --- KOTAK UTAMA KONFIRMASI (Confirmation Box) --- */
+/* ---------------------------------------------------- */
+.confirmation-box {
+    background: var(--color-white); 
+    border-radius: 25px;
+    padding: 40px 60px 80px 60px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+.program-registered-card {
+    /* Desain untuk kotak program yang didaftar */
+    background: var(--color-white);
+    border-radius: 25px;
+    border: 3px solid var(--color-accent-blue);
+    padding: 20px 30px;
+    margin-bottom: 50px;
+    display: flex;
+    align-items: center;
+    position: relative;
+    padding-left: 80px; 
+}
+
+.program-registered-card::before {
+    /* Ikon centang di kiri */
+    content: "✅"; 
+    font-size: 32px;
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.program-name {
+    font-size: 40px;
+    font-weight: 800;
+}
+
+/* ---------------------------------------------------- */
+/* --- TATA LETAK KOLOM DETAIL (Review Data) --- */
+/* ---------------------------------------------------- */
+.review-details-layout {
+    /* Menggunakan Grid dengan 3 kolom: Data Kiri (1fr), Pembatas (1px), Data Kanan (1fr) */
+    display: grid;
+    grid-template-columns: 1fr 3px 1fr; /* Diubah menjadi 3px untuk pembatas */
+    gap: 40px;
+    padding: 20px 0;
+}
+
+.review-details-layout::before {
+    /* Pembatas vertikal Hitam */
+    content: "";
+    width: 3px;
+    background-color: var(--color-black);
+    height: 100%;
+    grid-column: 2 / 3; /* Menempatkan di kolom kedua (tengah) */
+    justify-self: center; 
+}
+
+.review-column {
+    padding: 0 20px;
+    grid-column: auto;
+}
+
+.field-label {
+    /* Label seperti Nama Lengkap: */
+    font-size: 24px;
+    font-weight: 500;
+}
+
+.field-value {
+    /* Kotak tampilan nilai */
+    background: var(--color-white);
+    border-radius: 15px;
+    border: 1px solid var(--color-black); 
+    padding: 18px 25px; 
+    font-size: 24px;
+    color: var(--color-black); /* Menggunakan warna hitam agar data terlihat jelas */
+    font-weight: 400;
+    min-height: 68px; 
+    display: flex;
+    align-items: center;
+}
+
+.division-tag {
+    /* Styling khusus untuk Divisi (kotak biru muda) */
+    background: var(--color-light-blue); 
+    color: var(--color-primary); 
+    border: none;
+    font-weight: 600;
+    text-align: center;
+    justify-content: center;
+}
+
+.motivation-field .field-value {
+    /* Styling khusus untuk kotak Motivasi (lebih besar) */
+    min-height: 205px;
+    line-height: 1.5;
+    color: var(--color-text-gray); 
+    font-size: 18px;
+    border: 3px solid var(--color-light-blue);
+    align-items: flex-start;
+    padding-top: 15px;
+}
+
+/* ---------------------------------------------------- */
+/* --- PERSETUJUAN T&C --- */
+/* ---------------------------------------------------- */
+/* ... (Styling checkbox dan label) ... */
+
+/* ---------------------------------------------------- */
+/* --- TOMBOL AKSI & RESPONSIVITAS --- */
+/* ---------------------------------------------------- */
+/* ... (Styling tombol dan media queries) ... */
+
+@media (max-width: 1200px) {
+    /* DI LAYAR KECIL: Menghilangkan tata letak 2 kolom dan pembatas */
+    .review-details-layout {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    .review-details-layout::before {
+        content: none;
+    }
+    .review-column {
+        padding: 0;
+    }
+}

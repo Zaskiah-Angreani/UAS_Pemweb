@@ -1,0 +1,307 @@
+/* src/KonfirmasiRelawan.css - Styling RAPI untuk Halaman Konfirmasi */
+
+/* --- Variabel Umum (Konsisten dengan DaftarRelawan.css) --- */
+:root {
+    --color-navy: #100e2f; /* Warna Biru Tua Utama */
+    --color-text-dark: #000000;
+    --color-text-grey: #676767;
+    --color-bg-light: #f0f0f0; /* Warna Latar Belakang Kartu */
+    --color-bg-page: #ffffff;
+    --color-border-ringkasan: #70baff; /* Biru Muda untuk border Ringkasan */
+    --color-border-next-steps: #676767; /* Abu-abu untuk border Next Steps */
+    --color-success: #17143a; /* Biru Tua/Navy untuk icon/judul sukses */
+    --color-button-border: #2c2773;
+}
+
+/* --- Base Layout --- */
+.konfirmasi-page {
+    /* Mengganti .frame-20 dengan layout sentral */
+    max-width: 1400px;
+    margin: 0 auto;
+    padding-top: 127px; /* Beri ruang untuk header fixed */
+    background: var(--color-bg-page);
+    min-height: 100vh;
+}
+
+/* --- HEADER (Menggantikan .frame-56) --- */
+/* Asumsi header ini digunakan di seluruh aplikasi dan mungkin fixed/sticky */
+.header-section {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    background: var(--color-navy);
+    padding: 10px 40px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+.frame-56 {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.logo-text {
+    color: white;
+    font-size: 24px;
+    font-family: "Poppins-Bold", sans-serif;
+}
+.nav-links {
+    display: flex;
+    gap: 30px;
+}
+.nav-link {
+    color: white;
+    text-decoration: none;
+    font-family: "Poppins-Regular", sans-serif;
+    font-size: 20px;
+    transition: color 0.3s;
+}
+.nav-link:hover {
+    color: #ffd700; /* Warna highlight */
+}
+
+/* --- STEPPER (Navigasi Langkah - Opsional) --- */
+.step-navigation.final-step {
+    max-width: 900px;
+    margin: 40px auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+}
+.step-item {
+    text-align: center;
+    flex-grow: 1;
+    position: relative;
+    color: var(--color-text-grey);
+}
+.step-item.completed-step {
+    color: var(--color-navy);
+    font-weight: 500;
+}
+.step-item.active-step {
+    color: var(--color-success);
+    font-weight: bold;
+}
+/* Anda mungkin perlu menambahkan styling untuk .step-separator jika belum ada di DaftarRelawan.css */
+
+
+/* --- KONTEN UTAMA --- */
+.konfirmasi-content-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 20px;
+    text-align: center;
+}
+
+/* Bagian Pesan Sukses */
+.success-message-section {
+    margin-bottom: 50px;
+    padding: 30px;
+}
+
+.checkmark-icon {
+    /* Menggantikan .carbon-checkmark-filled */
+    color: #4CAF50; /* Warna Hijau Sukses */
+    font-size: 150px; /* Ukuran ikon */
+    margin-bottom: 20px;
+}
+
+.selamat-pendaftaran-anda-berhasil {
+    /* Menggantikan .selamat-pendaftaran-anda-berhasil */
+    color: var(--color-success);
+    font-family: "Poppins-Bold", sans-serif;
+    font-size: 48px;
+    font-weight: 700;
+    margin: 0 0 10px 0;
+}
+
+.anda-telah-resmi {
+    /* Menggantikan .anda-telah-resmi-akan-menjalani-program-rumah-belajar-starban */
+    color: var(--color-text-grey);
+    font-family: "Poppins-Medium", sans-serif;
+    font-size: 32px;
+    margin-top: 0;
+}
+.program-bold {
+    font-weight: bold;
+    color: var(--color-success);
+}
+
+/* --- Grid Kartu (Ringkasan & Next Steps) --- */
+.card-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* 2 Kolom */
+    gap: 30px;
+    margin-bottom: 50px;
+    text-align: left;
+}
+
+.card {
+    background: var(--color-bg-light);
+    border-radius: 30px;
+    padding: 30px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+}
+
+.card-title {
+    font-family: "Poppins-SemiBold", sans-serif;
+    font-size: 32px;
+    font-weight: 600;
+    margin-top: 0;
+    border-bottom: 2px solid rgba(0, 0, 0, 0.1);
+    padding-bottom: 15px;
+    margin-bottom: 20px;
+}
+
+/* Card 1: Ringkasan Pendaftaran */
+.ringkasan-pendaftaran-card {
+    border: 5px solid var(--color-border-ringkasan);
+}
+
+.status-box {
+    text-align: center;
+    margin-bottom: 30px;
+    padding: 10px 0;
+    border-bottom: 1px solid #d9d9d9;
+}
+.status-label {
+    color: var(--color-text-grey);
+    font-family: "Poppins-SemiBold", sans-serif;
+    font-size: 20px;
+    margin: 0;
+}
+.status-value {
+    color: var(--color-text-dark);
+    font-family: "Poppins-Bold", sans-serif;
+    font-size: 48px;
+    font-weight: 600;
+    margin: 5px 0 0 0;
+}
+
+.summary-detail .detail-item {
+    color: var(--color-text-grey);
+    font-family: "Poppins-SemiBold", sans-serif;
+    font-size: 24px;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+.summary-detail .detail-value {
+    color: var(--color-text-dark);
+    font-weight: bold;
+}
+
+
+/* Card 2: Apa Selanjutnya */
+.next-steps-card {
+    border: 3px solid var(--color-border-next-steps);
+}
+
+.next-steps-list {
+    list-style-type: decimal;
+    padding-left: 20px;
+    font-size: 20px;
+    line-height: 1.6;
+}
+.next-steps-list li {
+    margin-bottom: 15px;
+}
+.next-steps-list .step-title {
+    font-family: "Poppins-SemiBold", sans-serif;
+    font-weight: 600;
+    color: var(--color-text-dark);
+}
+
+/* --- Tombol Kembali ke Beranda --- */
+.button-group-wrapper {
+    text-align: center;
+}
+
+.kembali-ke-beranda-button {
+    /* Menggantikan .rounded-rectangle dan .kembali-ke-beranda */
+    background: #ffffff;
+    border-radius: 30px;
+    border: 3px solid var(--color-button-border);
+    color: var(--color-text-dark);
+    text-decoration: none;
+    font-family: "Poppins-Medium", sans-serif;
+    font-size: 36px;
+    font-weight: 500;
+    padding: 15px 40px;
+    display: inline-block;
+    transition: background 0.3s, color 0.3s;
+}
+
+.kembali-ke-beranda-button:hover {
+    background: var(--color-button-border);
+    color: #ffffff;
+}
+
+/* --- RESPONSIVITAS --- */
+@media (max-width: 1024px) {
+    .selamat-pendaftaran-anda-berhasil {
+        font-size: 40px;
+    }
+    .anda-telah-resmi {
+        font-size: 28px;
+    }
+    .card-grid {
+        grid-template-columns: 1fr; /* Ubah ke 1 kolom di tablet */
+    }
+}
+
+@media (max-width: 768px) {
+    .header-section {
+        padding: 10px 20px;
+    }
+    .nav-links {
+        gap: 15px;
+        font-size: 16px;
+    }
+    .selamat-pendaftaran-anda-berhasil {
+        font-size: 30px;
+    }
+    .anda-telah-resmi {
+        font-size: 20px;
+    }
+    .status-value {
+        font-size: 36px;
+    }
+    .summary-detail .detail-item {
+        font-size: 18px;
+    }
+    .kembali-ke-beranda-button {
+        font-size: 24px;
+        padding: 10px 30px;
+    }
+}
+
+@media (max-width: 480px) {
+    .nav-links {
+        display: none; /* Sembunyikan Nav Link di Mobile super kecil */
+    }
+    .frame-56 {
+        justify-content: center;
+    }
+    .checkmark-icon {
+        font-size: 100px;
+    }
+    .selamat-pendaftaran-anda-berhasil {
+        font-size: 24px;
+    }
+    .anda-telah-resmi {
+        font-size: 16px;
+    }
+    .card {
+        padding: 20px;
+    }
+    .card-title {
+        font-size: 24px;
+    }
+    .next-steps-list {
+        font-size: 16px;
+    }
+}

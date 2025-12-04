@@ -1,0 +1,140 @@
+/* src/tentang.css (KODE LENGKAP FINAL - Jarak Disesuaikan) */
+
+:root {
+    --color-navy: #0A192F;
+    --color-white: #FFFFFF;
+    --color-yellow: #FFC107; 
+    --color-accent: #64FFDA; /* Neon Green (Aksen) */
+    --color-light-gray: #f8f9fa;
+    --color-dark-gray: #333;
+    
+    /* SHADOW BARU: Menggunakan Navy sebagai dasar, tapi sangat transparan (Kalem) */
+    --shadow-calm-navy: 0 5px 15px rgba(10, 25, 47, 0.08); 
+}
+
+/* ----------------------------------------------------------------- */
+/* --- 1. ABOUTUS IMAGE SEBAGAI HEADER UTAMA (aboutus.jpg) --- */
+/* ----------------------------------------------------------------- */
+.aboutus-header-image-section {
+    /* Padding di sisi atas dan samping tetap, padding bawah dihilangkan/dibuat minimal */
+    padding: 30px 40px 0 40px; /* ✅ Padding Bawah Dihilangkan/Dibuat Minimal */
+    background-color: var(--color-white); 
+    width: 100%;
+    margin-bottom: 0; 
+}
+
+.about-image-wrapper {
+    width: 100%;
+    max-width: 1000px; 
+    margin: 0 auto; 
+    padding: 0; 
+}
+
+.aboutus-image {
+    width: 100%; 
+    height: auto;
+    max-height: 500px; 
+    object-fit: cover;
+    display: block; 
+    border-radius: 10px; 
+    box-shadow: var(--shadow-calm-navy); 
+}
+
+
+/* ---------------------------------------------------- */
+/* --- 2. SECTION KONTEN UTAMA (Title & Cards) --- */
+/* ---------------------------------------------------- */
+.about-content-section {
+    /* MENGURANGI JARAK ATAS KE GAMBAR (Menjadi 40px total dari bawah gambar) */
+    padding-top: 40px; /* ✅ Padding Atas 40px */
+    padding-bottom: 80px;
+    padding-left: 40px;
+    padding-right: 40px;
+    background-color: var(--color-white);
+}
+
+.section-title {
+    font-size: 38px;
+    color: var(--color-navy);
+    margin-top: 0; 
+    margin-bottom: 40px;
+    text-align: center;
+}
+
+
+/* --- 3. CONTENT WRAPPER & CARD STYLES --- */
+.content-wrapper {
+    display: flex;
+    flex-direction: column; 
+    /* ✅ MENYESUAIKAN JARAK ANTAR CARD SESUAI GAMBAR */
+    gap: 40px; 
+    padding: 0; 
+    max-width: 1000px; 
+    margin: 0 auto;
+}
+
+/* Gaya Default Card */
+.paragraf-card {
+    width: 100%; 
+    padding: 40px;
+    border-radius: 12px;
+    line-height: 1.8; 
+    font-size: 16px; 
+    
+    background-color: var(--color-white); 
+    border: 1px solid var(--color-light-gray); 
+    box-shadow: var(--shadow-calm-navy); 
+    
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Gaya Judul Card */
+.paragraf-card h3 {
+    color: var(--color-navy); 
+    font-size: 24px;
+    margin-bottom: 15px;
+    padding-bottom: 5px;
+}
+
+/* Hover Effect */
+.paragraf-card:hover {
+    transform: translateY(-5px); 
+    box-shadow: 0 10px 20px rgba(10, 25, 47, 0.15); 
+}
+
+/* Penyesuaian Warna Berdasarkan Kelas Card */
+.paragraf-card.paragraf-misi {
+    background-color: var(--color-white);
+    border-left: 5px solid var(--color-navy); 
+}
+
+.paragraf-card.paragraf-visi {
+    background-color: var(--color-light-gray);
+    border-left: 5px solid var(--color-navy); 
+}
+
+.paragraf-card.paragraf-program {
+    background-color: var(--color-white);
+    border-left: 5px solid var(--color-navy); 
+}
+
+
+/* --- MEDIA QUERIES --- */
+@media (max-width: 768px) {
+    .aboutus-image {
+        max-height: 250px; 
+    }
+    /* Menyesuaikan padding di mobile */
+    .aboutus-header-image-section {
+        padding: 20px 20px 0 20px; 
+    }
+    .about-content-section {
+        padding: 40px 20px 60px 20px;
+    }
+    .section-title {
+        font-size: 30px;
+    }
+    .paragraf-card {
+        padding: 30px 20px;
+    }
+}

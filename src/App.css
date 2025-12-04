@@ -1,0 +1,74 @@
+/* src/App.css (KODE KOREKSI FINAL UNTUK MENGHILANGKAN GARIS PUTIH) */
+
+/* 1. KOREKSI GLOBAL: Hapus margin dan padding bawaan browser pada BODY dan HTML */
+body, html {
+    margin: 0;
+    padding: 0;
+    /* Ini memastikan background putih tidak muncul di luar app-container */
+    background-color: var(--color-light-gray); 
+}
+
+:root {
+    --color-navy: #0A192F;
+    --color-white: #FFFFFF;
+    --color-accent: #64FFDA; 
+    --color-yellow: #FFC107; 
+    --color-light-gray: #f8f9fa;
+    --shadow-heavy: 0 8px 15px rgba(0, 0, 0, 0.2);
+    --shadow-light: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Kontainer utama yang MEMBATASI LEBAR */
+.app-container {
+    width: 100%;
+    max-width: 1200px; 
+    margin: 0 auto; 
+    background-color: var(--color-white);
+    box-shadow: var(--shadow-heavy); 
+    min-height: 100vh;
+}
+
+/* --- HEADER / NAVIGASI (frame-56) --- */
+.frame-56 {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 40px; 
+    background-color: var(--color-navy); 
+    color: var(--color-white);
+}
+.logo-text {
+    font-size: 28px;
+    font-weight: bold;
+    color: var(--color-white);
+    text-decoration: none; 
+}
+
+.nav-links {
+    display: flex;
+    gap: 30px;
+}
+
+.nav-links a {
+    color: var(--color-white);
+    text-decoration: none;
+    font-size: 16px;
+    padding: 5px 0;
+    transition: color 0.3s, border-bottom 0.3s;
+}
+
+.nav-links a:hover {
+    color: var(--color-yellow); /* Mengubah hover accent ke kuning */
+    border-bottom: 2px solid var(--color-yellow);
+}
+
+.login-button {
+    padding: 10px 25px;
+    /* PERBAIKAN: Mengganti warna neon green menjadi kuning emas */
+    background-color: var(--color-yellow); 
+    color: var(--color-navy);
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}

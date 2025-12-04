@@ -1,0 +1,487 @@
+/* src/DaftarRelawan.css - KODE CSS FINAL DENGAN OPTIMASI KEINDAHAN */
+
+/* --- VARIABEL DASAR --- */
+:root {
+    --color-navy: #0A192F; 
+    --color-accent-green: #64FFDA;
+    --color-white: #FFFFFF;
+    --color-text-dark: #333;
+    --color-border-light: #e0e0e0; /* Border lebih soft */
+    --color-success-light: #f6fffa; /* Background saat terpilih lebih lembut */
+    --color-grey-bg: #f7f9fc;
+    --padding-card-inner: 18px; /* Padding standar di dalam card */
+}
+
+/* --- GLOBAL LAYOUT & TYPOGRAPHY --- */
+.daftar-relawan-page {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Font yang lebih modern */
+}
+
+.header-section {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.card-shadow {
+    /* Shadow lebih halus */
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05), 0 5px 15px rgba(0, 0, 0, 0.03);
+    border-radius: 10px; /* Radius sedikit dikecilkan */
+    background-color: var(--color-white); 
+    padding: var(--padding-card-inner); /* Menggunakan variabel padding */
+    box-sizing: border-box;
+    transition: box-shadow 0.3s ease;
+}
+
+/* --- INFO CARD PROGRAM --- */
+.registration-info-card {
+    padding: 15px 25px;
+    margin-bottom: 30px;
+    border-left: 5px solid var(--color-accent-green);
+    background-color: var(--color-grey-bg);
+}
+.registration-info-card h3 {
+    color: var(--color-navy);
+    margin-top: 5px;
+    font-size: 20px;
+}
+.registration-info-card p {
+    margin-bottom: 0;
+    color: #555;
+}
+
+
+/* --- STEPPER --- */
+.stepper-section {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-bottom: 40px;
+    flex-wrap: wrap;
+}
+
+.stepper-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #999;
+    font-size: 14px;
+}
+.stepper-item.completed-step .checkmark {
+    background-color: var(--color-navy); 
+    color: var(--color-accent-green);
+    font-size: 14px;
+}
+.stepper-item.active-step .rectangle-483 {
+    background-color: var(--color-navy);
+    color: var(--color-accent-green);
+}
+.stepper-item.active-step div:last-child {
+    color: var(--color-navy);
+    font-weight: 600;
+}
+.stepper-item .rectangle-483, 
+.stepper-item .rectangle-482,
+.stepper-item .checkmark {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    background-color: #ccc;
+    color: var(--color-white);
+}
+
+/* ------------------------------------------------ */
+/* --- LANGKAH 1: INFORMASI PRIBADI (DITAMBAH SEBAGAI TEMPLATE) --- */
+/* ------------------------------------------------ */
+
+.form-step-1 .input-group-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); 
+    gap: 20px;
+}
+.form-step-1 .input-group.full-width {
+    grid-column: span 3;
+}
+.form-step-1 .input-group {
+    display: flex;
+    flex-direction: column;
+}
+.form-step-1 input,
+.form-step-1 select,
+.form-step-1 textarea {
+    padding: 12px;
+    border: 1px solid var(--color-border-light);
+    border-radius: 8px;
+    margin-top: 8px;
+    width: 100%;
+    box-sizing: border-box;
+    transition: border-color 0.2s;
+}
+
+
+/* ------------------------------------------------ */
+/* --- LANGKAH 2: KEAHLIAN & MINAT (REVISI ULANG) --- */
+/* ------------------------------------------------ */
+
+.form-step-2 {
+    margin-bottom: 30px;
+}
+
+.form-step-2 .input-group.card-shadow {
+    padding: var(--padding-card-inner); /* Padding konsisten */
+    border: 1px solid var(--color-border-light); /* Tambahkan border tipis */
+}
+
+/* --- LAYOUT GRID UTAMA (2 Kolom) --- */
+.step-2-content-grid {
+    display: grid;
+    grid-template-columns: 3fr 2fr; /* Kolom kiri sedikit lebih besar dari Motivasi */
+    gap: 30px;
+    align-items: flex-start;
+}
+
+/* --- KOLOM KIRI (Grid 2x2) --- */
+.column-left.column-grid-2x2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr; 
+    gap: 15px; /* Jarak antar Card Box lebih rapat */
+    grid-template-rows: auto auto; /* Tinggi disesuaikan dengan konten */
+}
+.column-left .keahlian-group.full-grid-width {
+    grid-column: span 2; 
+}
+
+.form-step-2 label {
+    font-weight: 600;
+    margin-bottom: 10px;
+    color: var(--color-navy); 
+    font-size: 15px;
+}
+
+
+/* --- SELECTION BOX (Card Pilihan) --- */
+.selection-group.grid-options {
+    display: grid;
+    grid-template-columns: 1fr 1fr; 
+    gap: 10px;
+}
+.commitment-group .selection-group,
+.divisi-group .selection-group { 
+    display: flex;
+    flex-direction: column;
+    gap: 8px; 
+}
+
+.selection-box {
+    border: 1px solid var(--color-border-light);
+    border-radius: 6px;
+    padding: 10px 12px;
+    cursor: pointer;
+    display: flex;
+    align-items: center; 
+    width: 100%;
+    box-sizing: border-box;
+    transition: all 0.2s;
+    background-color: var(--color-white);
+    font-size: 14px;
+}
+.selection-box:hover {
+    border-color: var(--color-accent-green);
+    background-color: var(--color-grey-bg);
+}
+.selection-box:has(input:checked) {
+    background-color: var(--color-success-light); 
+    border-color: var(--color-navy); 
+    box-shadow: 0 0 0 2px rgba(100, 255, 218, 0.5); 
+}
+.selection-box input[type="checkbox"], 
+.selection-box input[type="radio"] {
+    display: none; 
+}
+.selection-box input:checked + .option-label {
+    font-weight: 700;
+    color: var(--color-navy);
+}
+
+
+/* --- KOLOM KANAN (Motivasi & Portofolio) --- */
+.column-right {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    /* Visual break */
+    padding-left: 20px;
+    border-left: 1px solid var(--color-border-light);
+    margin-left: -20px;
+}
+
+.column-right .motivation-group {
+    flex-grow: 1; 
+}
+
+.column-right .textarea-full-height {
+    min-height: 150px; 
+    max-height: 250px; 
+    resize: vertical;
+    padding: 12px;
+    border: 1px solid var(--color-border-light);
+    border-radius: 8px;
+    margin-top: 8px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.column-right .file-upload-group {
+    padding: var(--padding-card-inner);
+    border: 1px solid var(--color-border-light);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05), 0 5px 15px rgba(0, 0, 0, 0.03);
+    border-radius: 10px;
+}
+.column-right .file-upload-group input[type="file"] {
+    border: none;
+    padding: 0;
+    margin-top: 8px;
+    background-color: transparent;
+}
+
+/* ------------------------------------------------ */
+/* --- LANGKAH 3: KONFIRMASI (PERBAIKAN TAMPILAN) --- */
+/* ------------------------------------------------ */
+
+/* Card Wrapper Khusus Step 3 */
+.step-3-confirmation {
+    max-width: 950px; /* Lebar Konsisten */
+    margin: 20px auto 40px auto;
+    padding: 40px; /* Padding lebih besar untuk konten review */
+}
+
+/* Program Info Card (Menggantikan group-163 visual) */
+.program-info-card {
+    background-color: var(--color-success-light); 
+    border: 1px solid var(--color-border-light);
+    border-radius: 10px;
+    padding: 20px 30px; 
+    margin-bottom: 35px; /* Jarak lebih baik */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.program-info-title { font-size: 14px; color: #666; margin: 0; }
+.program-info-name { font-size: 24px; font-weight: 700; color: var(--color-navy); margin: 5px 0 0 0; }
+.program-checkmark { font-size: 35px; color: var(--color-accent-green); }
+
+
+/* Review Section */
+.review-section-title {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--color-navy);
+    border-bottom: 2px solid var(--color-border-light);
+    padding-bottom: 15px;
+    margin-bottom: 30px;
+}
+
+/* Tata Letak Dua Kolom untuk Review Data */
+.review-data-layout {
+    display: grid;
+    grid-template-columns: 1fr 2px 1fr; /* Kolom Kiri | Garis Tengah | Kolom Kanan */
+    gap: 40px; /* Jarak antar kolom */
+}
+
+/* Garis Pemisah Vertikal */
+.review-data-separator {
+    background-color: var(--color-border-light);
+    width: 2px;
+    /* Mencakup seluruh tinggi yang dibutuhkan */
+    min-height: 400px; 
+}
+
+.review-group-title {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--color-navy);
+    margin-bottom: 25px;
+}
+
+/* Baris Data Review (Nama, Email, Divisi) */
+.review-data-row {
+    padding: 15px 0; /* Padding vertikal yang cukup */
+    border-bottom: 1px dotted var(--color-border-light);
+}
+.review-data-row:last-of-type {
+    border-bottom: none;
+}
+
+.review-label {
+    font-size: 14px;
+    color: #666;
+    font-weight: 500;
+    margin-bottom: 4px;
+}
+
+.review-value {
+    font-size: 16px;
+    color: var(--color-text-dark);
+    font-weight: 600;
+    word-wrap: break-word; /* Mencegah overflow */
+}
+
+/* Motivasi specific styling */
+.review-motivasi-box {
+    margin-top: 10px;
+    padding: 15px;
+    background-color: var(--color-grey-bg);
+    border: 1px solid var(--color-border-light);
+    border-radius: 8px;
+    font-size: 14px;
+    line-height: 1.6;
+    min-height: 180px; /* Tinggi minimum yang baik */
+    text-align: justify;
+    color: var(--color-text-dark);
+}
+
+/* Agreement Section & Tombol */
+.agreement-section {
+    margin-top: 40px;
+    border-top: 2px solid var(--color-border-light);
+    padding-top: 30px;
+}
+.agreement-checkbox-wrapper {
+    display: flex;
+    align-items: center;
+    margin-bottom: 30px;
+}
+.agreement-checkbox-wrapper input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    margin-right: 15px;
+    cursor: pointer;
+}
+.agreement-text {
+    font-size: 16px;
+    color: var(--color-text-dark);
+    font-weight: 600;
+}
+
+
+/* --- TOMBOL NAVIGASI SEJAJAR (Kembali & Kirim/Lanjut) --- */
+.button-group-wrapper {
+    margin-top: 50px;
+    display: flex;
+    justify-content: space-between; 
+    gap: 30px;
+    padding: 0 20px; 
+}
+
+/* Tombol Kembali (back-step-button) */
+.back-step-button {
+    width: 100%;
+    padding: 15px 25px;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 8px;
+    cursor: pointer;
+    background-color: var(--color-white); 
+    color: var(--color-navy);
+    border: 2px solid var(--color-navy); 
+    transition: background-color 0.2s, color 0.2s;
+}
+.back-step-button:hover {
+    background-color: var(--color-navy);
+    color: var(--color-accent-green);
+}
+
+/* Tombol Kirim (next-step-button) */
+.next-step-button {
+    width: 100%;
+    padding: 15px 25px;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 8px;
+    cursor: pointer;
+    background-color: var(--color-navy); 
+    color: var(--color-accent-green);
+    border: none;
+    transition: background-color 0.2s;
+}
+.next-step-button:hover {
+    background-color: #0d2c54;
+}
+
+/* ------------------------------------------------ */
+/* --- MEDIA QUERY (Responsif) --- */
+/* ------------------------------------------------ */
+
+@media (max-width: 992px) {
+    /* Langkah 1 */
+    .form-step-1 .input-group-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    /* Langkah 2 */
+    .step-2-content-grid {
+        grid-template-columns: 1fr; 
+    }
+    
+    .column-left.column-grid-2x2 {
+        grid-template-columns: 1fr; 
+        grid-template-rows: auto;
+    }
+    .column-left .keahlian-group.full-grid-width {
+        grid-column: span 1; 
+    }
+    .selection-group.grid-options {
+        grid-template-columns: 1fr 1fr; 
+    }
+    .column-right {
+        padding-left: 0;
+        border-left: none;
+        margin-left: 0;
+    }
+
+    /* Langkah 3 (Perbaikan Responsif) */
+    .review-data-layout {
+        grid-template-columns: 1fr; /* Stacked layout di tablet/mobile */
+        gap: 20px;
+    }
+    .review-data-separator {
+        display: none; /* Hilangkan garis pemisah vertikal */
+    }
+    .review-group-data.kolom-kanan {
+        /* Tambahkan pemisah horizontal di mobile/tablet */
+        border-top: 1px solid var(--color-border-light);
+        padding-top: 20px;
+        margin-top: 20px;
+    }
+
+
+    /* Tombol Navigasi Umum */
+    .button-group-wrapper {
+        flex-direction: column-reverse; 
+        gap: 10px;
+        padding: 0 10px;
+    }
+    .button-group-wrapper .group-57 {
+        flex: none;
+        width: 100%;
+        max-width: none;
+    }
+}
+
+@media (max-width: 768px) {
+    .form-step-1 .input-group-grid {
+        grid-template-columns: 1fr; 
+    }
+    .stepper-item {
+        font-size: 12px;
+    }
+    .selection-group.grid-options {
+        grid-template-columns: 1fr; 
+    }
+}

@@ -1,0 +1,75 @@
+/* src/Navbar.css */
+
+/* Mengambil variabel warna dari root App.css jika sudah didefinisikan secara global */
+/* Jika tidak, definisikan ulang di sini untuk modularitas */
+:root {
+    --color-navy: #0A192F;
+    --color-white: #FFFFFF;
+    --color-yellow: #FFC107; /* Kuning Emas */
+}
+
+/* --- NAVIGASI UTAMA (frame-56) --- */
+.frame-56 {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 40px; 
+    background-color: var(--color-navy); 
+    color: var(--color-white);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
+}
+
+.logo-text {
+    font-size: 28px;
+    font-weight: bold;
+    color: var(--color-white);
+    text-decoration: none; 
+}
+
+/* --- LINK NAVIGASI TENGAH --- */
+.nav-links {
+    display: flex;
+    gap: 30px;
+}
+
+.nav-links a {
+    color: var(--color-white);
+    text-decoration: none;
+    font-size: 16px;
+    padding: 5px 0;
+    transition: color 0.3s, border-bottom 0.3s;
+}
+
+.nav-links a:hover,
+.nav-links a.active { /* Style untuk link yang sedang aktif */
+    color: var(--color-yellow); 
+    border-bottom: 2px solid var(--color-yellow);
+}
+
+/* --- TOMBOL LOGIN --- */
+.login-button {
+    padding: 10px 25px;
+    background-color: var(--color-yellow); 
+    color: var(--color-navy);
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    text-decoration: none; /* Pastikan link tidak bergaris bawah */
+    transition: background-color 0.3s, opacity 0.3s;
+}
+
+.login-button:hover {
+    background-color: #ffda6a; /* Warna kuning sedikit lebih muda saat hover */
+}
+
+/* --- MEDIA QUERY (Responsif Sederhana) --- */
+@media (max-width: 768px) {
+    .frame-56 {
+        flex-direction: column;
+        gap: 15px;
+        padding: 15px 20px;
+    }
+    .nav-links {
+        gap: 15px;
+    }
+}

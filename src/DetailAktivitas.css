@@ -1,0 +1,246 @@
+/* src/DetailAktivitas.css - Layout sesuai Figma */
+
+:root {
+    --color-navy: #0A192F;
+    --color-white: #FFFFFF;
+    --color-accent-green: #64FFDA; /* Warna hijau muda untuk tombol/highlight */
+    --color-light-gray: #f8f9fa; /* Warna latar belakang halaman */
+    --color-text-dark: #333; /* Warna teks umum */
+    --color-text-light: #666; /* Warna teks sekunder */
+    --color-border: #e0e0e0; /* Warna border */
+    --color-shadow: 0 4px 10px rgba(0, 0, 0, 0.08); /* Shadow yang lebih lembut */
+    
+    /* Warna untuk kategori */
+    --color-category-lingkungan: #5cb85c; /* Hijau */
+    --color-category-pendidikan: #337ab7; /* Biru */
+    --color-category-sosial: #d9534f; /* Merah */
+    --color-category-kesehatan: #A3D9F8; /* Biru muda */
+    /* Tambahkan kategori lain jika ada */
+
+    --color-price-gratis: #FFC107; /* Kuning */
+    --color-price-berbayar: #DC3545; /* Merah */
+}
+
+/* Base Page Styling */
+.detail-aktivitas-page {
+    background-color: var(--color-light-gray);
+    min-height: 100vh;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Font standar */
+    color: var(--color-text-dark);
+}
+
+/* Header (Menggunakan class yang sudah ada di App.css atau Aktivitas.css) */
+/* Pastikan .frame-56 dan .logo-text sudah ada gaya dasar */
+
+/* --- DETAIL KONTEN UTAMA --- */
+.detail-content-section-figma {
+    max-width: 900px; /* Ukuran sesuai Figma */
+    margin: 30px auto; /* Margin atas dan bawah */
+    padding: 0 20px;
+}
+
+/* Judul Utama dan Kategori di Bagian Atas */
+.detail-header-figma {
+    display: flex;
+    flex-direction: column; /* Judul di atas kategori */
+    align-items: flex-start; /* Rata kiri */
+    margin-bottom: 25px;
+}
+
+.detail-title-main-figma {
+    font-size: 36px;
+    color: var(--color-navy);
+    margin: 0 0 10px 0;
+    line-height: 1.2;
+}
+
+.detail-category-figma {
+    display: inline-block;
+    padding: 6px 15px;
+    border-radius: 5px;
+    font-size: 14px;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: var(--color-white); /* Default text color for categories */
+}
+/* Warna Latar Belakang Kategori */
+.detail-category-lingkungan { background-color: var(--color-category-lingkungan); }
+.detail-category-pendidikan { background-color: var(--color-category-pendidikan); }
+.detail-category-sosial { background-color: var(--color-category-sosial); }
+.detail-category-kesehatan { background-color: var(--color-category-kesehatan); color: var(--color-navy); } /* Text color navy for light background */
+
+
+/* Gambar Hero */
+.detail-image-wrapper-figma {
+    width: 100%;
+    height: 350px; /* Tinggi gambar hero */
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 30px;
+    box-shadow: var(--color-shadow);
+}
+
+.detail-image-figma {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* --- KONTEN UTAMA (Dua Kolom) --- */
+.detail-body-wrapper-figma {
+    display: flex;
+    gap: 30px; /* Jarak antar kolom */
+}
+
+.detail-left-column-figma {
+    flex: 2; /* Kolom kiri lebih lebar */
+    background-color: var(--color-white);
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: var(--color-shadow);
+}
+
+.detail-right-column-figma {
+    flex: 1; /* Kolom kanan lebih sempit */
+}
+
+/* Info Blocks (Mengenai Program, Kualifikasi) */
+.info-block {
+    margin-bottom: 30px;
+}
+
+.info-block:last-child {
+    margin-bottom: 0; /* Hapus margin bawah di blok terakhir */
+}
+
+.info-block-title {
+    font-size: 20px;
+    color: var(--color-navy);
+    margin-bottom: 15px;
+    font-weight: 600;
+}
+
+.info-block-text {
+    font-size: 15px;
+    line-height: 1.7;
+    color: var(--color-text-dark);
+}
+
+.info-block-list {
+    list-style: decimal; /* Nomor urut */
+    padding-left: 20px;
+    font-size: 15px;
+    line-height: 1.7;
+    color: var(--color-text-dark);
+}
+
+.info-block-list li {
+    margin-bottom: 8px;
+}
+
+
+/* Detail Singkat Card (Kolom Kanan) */
+.detail-summary-card {
+    background-color: var(--color-white);
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: var(--color-shadow);
+    position: sticky; /* Agar tetap di tempat saat scroll */
+    top: 30px; /* Jarak dari atas */
+}
+
+.detail-summary-card h3 {
+    font-size: 20px;
+    color: var(--color-navy);
+    margin-bottom: 20px;
+    font-weight: 600;
+}
+
+.summary-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+    font-size: 15px;
+    color: var(--color-text-dark);
+}
+
+.summary-icon {
+    font-size: 20px;
+    margin-right: 15px;
+    color: var(--color-navy);
+}
+
+.summary-text {
+    flex-grow: 1; /* Agar teks mengisi sisa ruang */
+}
+
+
+/* Tombol Daftar di Detail Page */
+.register-button-figma {
+    width: 100%;
+    padding: 15px 25px;
+    background-color: var(--color-accent-green);
+    color: var(--color-navy);
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 20px;
+}
+
+.register-button-figma:hover {
+    background-color: #4cd1a4; /* Sedikit lebih gelap */
+}
+
+/* Tombol Kembali */
+.back-link-figma {
+    display: block;
+    width: 100%;
+    text-align: center;
+    margin-top: 15px;
+    color: var(--color-text-light);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    background: none;
+    border: none;
+    transition: color 0.3s ease;
+}
+
+.back-link-figma:hover {
+    color: var(--color-navy);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .detail-content-section-figma {
+        margin-top: 20px;
+    }
+    .detail-header-figma {
+        margin-left: 20px;
+        margin-right: 20px;
+    }
+    .detail-title-main-figma {
+        font-size: 28px;
+    }
+    .detail-image-wrapper-figma {
+        height: 250px;
+        border-radius: 0; /* Gambar full-width di mobile */
+    }
+    .detail-body-wrapper-figma {
+        flex-direction: column; /* Kolom jadi tumpuk */
+        padding: 0 20px;
+    }
+    .detail-left-column-figma,
+    .detail-right-column-figma {
+        flex: auto; /* Mengambil lebar penuh */
+        padding: 20px;
+    }
+    .detail-summary-card {
+        position: static; /* Hapus sticky di mobile */
+        top: auto;
+    }
+}
