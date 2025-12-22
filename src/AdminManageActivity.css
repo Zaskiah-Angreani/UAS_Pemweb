@@ -1,0 +1,176 @@
+.admin-manage-activities-container {
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 30px;
+    background-color: #f8f9fa;
+    border-radius: 12px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.08);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.admin-manage-activities-container h2 {
+    color: #343a40;
+    font-size: 26px;
+    margin-bottom: 25px;
+    border-bottom: 2px solid #dee2e6;
+    padding-bottom: 10px;
+}
+
+.back-btn, .action-btn {
+    padding: 8px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: background-color 0.3s;
+}
+
+.back-btn {
+    background-color: #6c757d;
+    color: white;
+}
+
+.back-btn:hover {
+    background-color: #5a6268;
+}
+
+.action-btn.primary {
+    background-color: #28a745;
+    color: white;
+}
+
+.action-btn.primary:hover {
+    background-color: #218838;
+}
+
+.activity-list-table {
+    margin-top: 30px;
+    overflow-x: auto; 
+}
+
+.activity-list-table table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: white;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.activity-list-table th,
+.activity-list-table td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #dee2e6;
+}
+
+.activity-list-table th {
+    background-color: #e9ecef;
+    color: #343a40;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 14px;
+}
+
+.activity-list-table tbody tr:hover {
+    background-color: #f1f1f1;
+}
+
+/* Badge Status */
+.status-badge {
+    padding: 5px 10px;
+    border-radius: 15px;
+    font-size: 12px;
+    font-weight: bold;
+    display: inline-block;
+}
+
+.status-mendatang {
+    background-color: #fff3cd;
+    color: #856404;
+}
+
+.status-selesai {
+    background-color: #d4edda;
+    color: #155724;
+}
+
+.status-dibatalkan {
+    background-color: #f8d7da;
+    color: #721c24;
+}
+
+.activity-list-table .action-edit,
+.activity-list-table .action-delete {
+    padding: 6px 10px;
+    margin-left: 5px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 13px;
+    transition: background-color 0.2s;
+    white-space: nowrap;
+}
+
+.activity-list-table .action-edit {
+    background-color: #ffc107;
+    color: #343a40;
+    border: 1px solid #ffc107;
+}
+
+.activity-list-table .action-edit:hover {
+    background-color: #e0a800;
+}
+
+.activity-list-table .action-delete {
+    background-color: #dc3545;
+    color: white;
+    border: 1px solid #dc3545;
+}
+
+.activity-list-table .action-delete:hover {
+    background-color: #c82333;
+}
+
+@media (max-width: 768px) {
+    .admin-manage-activities-container {
+        padding: 20px;
+        margin: 20px;
+    }
+    
+    .activity-list-table table, 
+    .activity-list-table thead, 
+    .activity-list-table tbody, 
+    .activity-list-table th, 
+    .activity-list-table td, 
+    .activity-list-table tr {
+        display: block;
+    }
+
+    .activity-list-table thead tr {
+        position: absolute;
+        top: -9999px;
+        left: -9999px;
+    }
+
+    .activity-list-table td {
+        border: none;
+        border-bottom: 1px solid #eee;
+        position: relative;
+        padding-left: 50%;
+        text-align: right;
+    }
+
+    .activity-list-table td:before {
+        content: attr(data-label);
+        position: absolute;
+        left: 6px;
+        width: 45%;
+        padding-right: 10px;
+        white-space: nowrap;
+        text-align: left;
+        font-weight: bold;
+        color: #343a40;
+    }
+    
+    .activity-list-table td:nth-child(6) {
+        text-align: left;
+    }
+}

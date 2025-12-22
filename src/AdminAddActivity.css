@@ -1,0 +1,119 @@
+
+.admin-add-activity-container {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 30px;
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.admin-add-activity-container h2 {
+    color: #007bff;
+    font-size: 26px;
+    margin-bottom: 25px;
+    border-bottom: 2px solid #e9ecef;
+    padding-bottom: 10px;
+}
+
+/* Tombol Kembali */
+.back-btn {
+    background-color: #6c757d;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-bottom: 25px;
+    transition: background-color 0.3s;
+}
+
+.back-btn:hover {
+    background-color: #5a6268;
+}
+
+/* Form Layout */
+.activity-form {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+/* Pengaturan Input */
+.input-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.input-group label {
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: #495057;
+}
+
+.input-group input[type="text"],
+.input-group input[type="date"],
+.input-group input[type="time"],
+.input-group select,
+.input-group textarea {
+    padding: 10px;
+    border: 1px solid #ced4da;
+    border-radius: 6px;
+    font-size: 16px;
+    width: 100%;
+    box-sizing: border-box;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.input-group textarea {
+    resize: vertical;
+    grid-column: span 2; 
+}
+
+.input-group input:focus,
+.input-group select:focus,
+.input-group textarea:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+    outline: none;
+}
+
+/* Tombol Submit */
+.submit-btn {
+    grid-column: span 2;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: bold;
+    transition: background-color 0.3s, transform 0.1s;
+    margin-top: 15px;
+}
+
+.submit-btn.primary {
+    background-color: #28a745; 
+    color: white;
+}
+
+.submit-btn.primary:hover:not(:disabled) {
+    background-color: #218838;
+    transform: translateY(-1px);
+}
+
+.submit-btn:disabled {
+    background-color: #c0c0c0;
+    cursor: not-allowed;
+}
+
+/* Responsiveness */
+@media (max-width: 600px) {
+    .activity-form {
+        grid-template-columns: 1fr;
+    }
+    .input-group textarea,
+    .submit-btn {
+        grid-column: span 1;
+    }
+}

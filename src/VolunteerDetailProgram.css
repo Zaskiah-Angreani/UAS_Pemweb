@@ -1,0 +1,229 @@
+:root {
+    --color-page-bg: #fbf0f0; 
+    --color-primary: #100e2f;    
+    --color-text-dark: #000000;
+    --color-button: #17143a;
+    --color-white: #ffffff;
+    --color-border-light: #ddd;
+}
+
+.detail-page-wrapper {
+    background: var(--color-page-bg);
+    min-height: 100vh;
+    padding-top: 127px; 
+}
+
+.content-area {
+   
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px 60px 20px; 
+}
+
+.main-header {
+    background: var(--color-primary);
+    padding: 10px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    position: fixed; 
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    height: 127px; 
+}
+
+.header-logo-wrapper {
+    height: 100%; 
+    display: flex;
+    align-items: center;
+}
+
+.header-logo {
+    width: auto;
+    height: 100px; 
+    margin-left: 0; 
+    object-fit: contain;
+}
+
+.header-nav {
+    display: flex;
+    gap: 30px;
+    align-items: center;
+}
+
+.nav-item {
+    color: var(--color-white);
+    text-decoration: none;
+    font-family: "Poppins-Regular", sans-serif;
+    font-size: 20px;
+    font-weight: 400;
+}
+
+.main-title {
+    color: var(--color-primary);
+    text-align: center;
+    font-family: "Poppins-ExtraBold", sans-serif;
+    font-size: 64px;
+    font-weight: 800;
+    margin-top: 40px;
+    margin-bottom: 20px;
+}
+
+.tagline {
+    color: var(--color-primary);
+    text-align: center; 
+    font-family: "Poppins-MediumItalic", sans-serif;
+    font-size: 36px;
+    font-style: italic;
+    margin-bottom: 50px;
+}
+
+.summary-section {
+    display: flex;
+    gap: 40px;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-bottom: 60px;
+}
+
+.summary-image {
+    border-radius: 15px;
+    width: 45%; 
+    height: auto; 
+    max-height: 366px;
+    object-fit: cover;
+    flex-shrink: 0;
+}
+
+.description-text {
+    width: 55%; 
+    color: var(--color-primary);
+    text-align: justify; 
+    font-family: "Poppins-Medium", sans-serif;
+    font-size: 24px;
+    font-weight: 500;
+    line-height: 1.6;
+}
+
+.detail-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px; 
+}
+
+.detail-row {
+    background: var(--color-white); 
+    padding: 20px 40px;
+    border: 1px solid var(--color-border-light);
+    border-radius: 0px; 
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    min-height: 90px;
+}
+
+.detail-label, .detail-value {
+    color: var(--color-text-dark);
+    font-family: "Poppins-Medium", sans-serif;
+    font-size: 32px; 
+    font-weight: 500;
+}
+
+.detail-label {
+    flex-basis: 60%;
+    text-align: left;
+}
+
+.detail-value {
+    flex-basis: 40%;
+    text-align: right;
+}
+
+.button-footer {
+    text-align: center;
+    margin-top: 80px;
+}
+
+.back-button {
+    background: var(--color-button);
+    color: var(--color-white);
+    border-radius: 10px;
+    width: 321px;
+    height: 92px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    font-family: "Poppins-Bold", sans-serif;
+    font-size: 32px;
+    font-weight: 700;
+    transition: background-color 0.3s;
+}
+
+.back-button:hover {
+    background: #2a2559;
+}
+
+@media (max-width: 1000px) {
+    .summary-section {
+        flex-direction: column;
+        align-items: center;
+    }
+    .summary-image, .description-text {
+        width: 100%;
+        max-width: 800px;
+        text-align: center;
+    }
+}
+
+@media (max-width: 768px) {
+    .main-header {
+        height: 80px;
+    }
+    .detail-page-wrapper {
+        padding-top: 80px;
+    }
+    .main-title {
+        font-size: 48px;
+    }
+    .tagline {
+        font-size: 28px;
+    }
+    .detail-label, .detail-value {
+        font-size: 24px;
+    }
+    .detail-row {
+        padding: 20px 25px;
+    }
+    .header-nav {
+        gap: 15px;
+    }
+}
+
+@media (max-width: 500px) {
+    .main-title {
+        font-size: 36px;
+    }
+    .tagline {
+        font-size: 20px;
+    }
+    .detail-label, .detail-value {
+        font-size: 20px;
+    }
+    .detail-row {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .detail-value {
+        text-align: left;
+        margin-top: 5px;
+        font-weight: 700;
+    }
+    .back-button {
+        width: 100%;
+        max-width: 250px;
+        font-size: 24px;
+    }
+}

@@ -1,0 +1,317 @@
+:root {
+    --color-navy: #0A192F;
+    --color-white: #FFFFFF;
+    --color-accent: #64FFDA;
+    --color-yellow: #FFC107;
+    --color-light-gray: #f8f9fa;
+    --color-dark-gray: #333;
+    --shadow-card: 0 4px 12px rgba(10, 25, 47, 0.1); 
+}
+
+.aktivitas-page {
+    background-color: var(--color-light-gray);
+    min-height: 100vh;
+}
+
+.search-filter-section {
+    padding: 50px 40px; 
+    background-color: var(--color-navy); 
+    display: flex;
+    flex-direction: column; 
+    gap: 30px; 
+    align-items: center;
+    justify-content: center;
+    min-height: 250px;
+}
+
+.search-text-group {
+    text-align: center;
+    color: var(--color-white);
+    max-width: 700px;
+}
+
+.search-headline {
+    font-size: 36px;
+    font-weight: bold;
+    margin-bottom: 5px; 
+}
+
+.search-subtext {
+    font-size: 18px;
+    margin-bottom: 5px; 
+    opacity: 0.9;
+}
+
+.search-subtext-2 {
+    font-size: 18px;
+    font-weight: bold; 
+    color: var(--color-accent); 
+}
+
+.search-bar-group { 
+    display: flex;
+    max-width: 800px; 
+    width: 100%;
+    gap: 10px;
+}
+
+.search-bar-wrapper {
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    background-color: var(--color-white);
+    border-radius: 12px; 
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+    padding: 0 15px;
+}
+
+.search-input {
+    flex-grow: 1;
+    padding: 15px 0; 
+    border: none;
+    font-size: 16px;
+    outline: none; 
+}
+
+.search-icon {
+    font-size: 18px;
+    color: var(--color-dark-gray);
+    margin-right: 10px;
+}
+
+.search-button {
+    padding: 15px 35px; 
+    background-color: var(--color-accent); 
+    color: var(--color-navy);
+    border: none;
+    border-radius: 12px; 
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+
+.search-button:hover {
+    background-color: #4cd1a4; 
+}
+
+
+.activities-grid-section {
+    padding: 40px;
+    max-width: 1300px; 
+    margin: 0 auto; 
+}
+
+.grid-title {
+    font-size: 32px;
+    color: var(--color-navy);
+    margin-bottom: 30px;
+    text-align: left;
+}
+
+.activities-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); 
+    gap: 30px;
+    align-items: stretch;
+}
+
+.activity-card-link {
+    text-decoration: none; 
+    color: inherit; 
+    display: block; 
+    height: 100%; 
+    position: relative;
+}
+
+.activity-card {
+    background-color: var(--color-white);
+    border-radius: 12px;
+    box-shadow: var(--shadow-card);
+    overflow: hidden;
+    transition: transform 0.3s, box-shadow 0.3s;
+    height: 100%; 
+    
+    display: flex;
+    flex-direction: column; 
+}
+
+.activity-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(10, 25, 47, 0.15);
+}
+
+.card-image-wrapper {
+    position: relative;
+    height: 200px;
+    flex-shrink: 0;
+}
+
+.card-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.price-tag-gratis,
+.price-tag-paid { 
+    position: absolute;
+    bottom: 15px; 
+    left: 15px; 
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-weight: bold;
+    font-size: 14px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2); 
+    color: var(--color-white); 
+}
+
+.price-tag-gratis {
+    background-color: var(--color-yellow); 
+    color: var(--color-navy); 
+}
+
+.price-tag-paid {
+    background-color: #DC3545; 
+    color: var(--color-white);
+}
+
+.card-content {
+    padding: 20px;
+    display: flex;
+    flex-direction: column; 
+    flex-grow: 1; 
+}
+
+.activity-details-wrapper {
+    flex-grow: 1;
+}
+
+.activity-title {
+    font-size: 20px;
+    color: var(--color-navy);
+    margin-bottom: 10px; 
+    line-height: 1.3;
+}
+
+.category-button {
+    display: inline-block; 
+    padding: 5px 15px;
+    border-radius: 5px; 
+    font-size: 12px; 
+    font-weight: bold;
+    margin-bottom: 15px; 
+    text-transform: uppercase;
+    color: var(--color-white);
+}
+
+.category-kesehatan { 
+    background-color: #A3D9F8; 
+    color: var(--color-navy);
+} 
+.category-lingkungan { 
+    background-color: #5cb85c; 
+} 
+.category-pendidikan { 
+    background-color: #337ab7; 
+} 
+.category-sosial { 
+    background-color: #d9534f; 
+} 
+
+.activity-description {
+    font-size: 14px; 
+    color: #6c757d;
+    height: 40px; 
+    overflow: hidden; 
+    text-overflow: ellipsis; 
+    display: -webkit-box; 
+    -webkit-line-clamp: 2; 
+    -webkit-box-orient: vertical;
+    margin-bottom: 15px;
+}
+
+.activity-meta-rows {
+    margin-top: auto; 
+    padding-top: 10px; 
+}
+
+.activity-meta-row {
+    display: flex;
+    align-items: center;
+    padding: 5px 0; 
+}
+
+.meta-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.meta-icon {
+    width: auto; 
+    font-size: 18px; 
+    line-height: 1; 
+}
+
+.meta-text {
+    font-size: 14px;
+    color: var(--color-dark-gray);
+}
+
+
+.footer-section {
+    background-color: var(--color-navy);
+    color: var(--color-white);
+    padding: 30px 40px;
+    text-align: center;
+    margin-top: 50px;
+}
+
+.footer-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+
+.footer-copyright {
+    font-size: 14px;
+    opacity: 0.8;
+}
+
+
+@media (max-width: 1024px) {
+    .activities-grid-section {
+        padding: 40px 30px; 
+    }
+}
+
+@media (max-width: 768px) {
+    .search-filter-section {
+        padding: 30px 20px;
+        gap: 20px; 
+        min-height: 200px;
+    }
+    .search-headline {
+        font-size: 28px;
+    }
+    .search-subtext, .search-subtext-2 {
+        font-size: 16px;
+    }
+    .search-bar-group {
+        flex-direction: column; 
+        width: 100%;
+        max-width: none;
+    }
+    .search-button {
+        width: 100%;
+        margin-top: 5px; 
+    }
+    .activities-grid-section {
+        padding: 40px 20px;
+    }
+    .activities-grid {
+        grid-template-columns: 1fr;
+    }
+}

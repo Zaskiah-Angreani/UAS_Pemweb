@@ -1,0 +1,143 @@
+:root {
+    --color-navy: #0A192F;
+    --color-white: #FFFFFF;
+    --color-yellow: #FFC107;
+}
+
+.frame-56 {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 40px; 
+    background-color: var(--color-navy); 
+    color: var(--color-white);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
+}
+
+.logo-text {
+    font-size: 28px;
+    font-weight: bold;
+    color: var(--color-white);
+    text-decoration: none; 
+}
+
+.nav-links {
+    display: flex;
+    gap: 30px;
+}
+
+.nav-links a {
+    color: var(--color-white);
+    text-decoration: none;
+    font-size: 16px;
+    padding: 5px 0;
+    transition: color 0.3s, border-bottom 0.3s;
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+    color: var(--color-yellow); 
+    border-bottom: 2px solid var(--color-yellow);
+}
+
+.auth-section {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.login-button {
+    padding: 12px 28px;
+    background-color: var(--color-yellow); 
+    color: var(--color-navy);
+    border-radius: 25px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 16px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(255, 193, 7, 0.4);
+}
+
+.login-button:hover {
+    background-color: #ffda6a;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(255, 193, 7, 0.6);
+}
+
+.saya-button {
+    padding: 12px 28px;
+    background: linear-gradient(135deg, var(--color-yellow), #ffda6a);
+    color: var(--color-navy) !important;
+    border-radius: 25px;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(255, 193, 7, 0.4);
+}
+
+.saya-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(255, 193, 7, 0.6);
+}
+
+.logout-button {
+    padding: 12px 24px;
+    background: linear-gradient(135deg, #ef4444, #dc2626);
+    color: white;
+    border: none;
+    border-radius: 25px;
+    font-weight: bold;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(239, 68, 68, 0.4);
+}
+
+.logout-button:hover {
+    background: linear-gradient(135deg, #dc2626, #b91c1c);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(239, 68, 68, 0.6);
+}
+
+@media (max-width: 768px) {
+    .frame-56 {
+        flex-direction: column;
+        gap: 20px;
+        padding: 15px 20px;
+    }
+    
+    .nav-links {
+        gap: 20px;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    
+    .auth-section {
+        flex-direction: column;
+        gap: 10px;
+        width: 100%;
+    }
+    
+    .login-button, .saya-button, .logout-button {
+        padding: 10px 20px;
+        font-size: 14px;
+        width: 100%;
+        max-width: 200px;
+    }
+}
+
+@media (max-width: 480px) {
+    .logo-text {
+        font-size: 24px;
+    }
+    
+    .nav-links {
+        gap: 15px;
+    }
+    
+    .nav-links a {
+        font-size: 14px;
+    }
+}

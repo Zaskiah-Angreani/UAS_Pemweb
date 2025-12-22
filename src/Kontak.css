@@ -1,0 +1,240 @@
+:root {
+    --color-page-bg: #ffffff;
+    --color-form-bg: #fbf0f0;
+    --color-navy-dark: #100e2f;
+    --color-text-dark: #1e1e1e;
+    --color-placeholder: #b9b3b3;
+    --color-button: #17143a;
+    --color-label: #555555;
+    --color-footer-text: #d9d9d9;
+    --spacing-unit: 8px; 
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+.kontak-page-container {
+    background-color: var(--color-page-bg);
+    min-height: 100vh;
+    padding-top: 10px; 
+    overflow-x: hidden; 
+}
+
+.main-content-contact {
+    margin: 0 auto;
+    padding: 20px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+}
+
+.contact-title {
+    font-size: 40px;
+    font-weight: 700;
+    color: var(--color-navy-dark);
+    text-align: center;
+  
+    margin-bottom: 20px;
+}
+
+.contact-main-wrapper {
+    max-width: 500px; 
+    width: 100%;
+}
+
+.contact-info-section {
+    display: none; 
+}
+
+.contact-form-section {
+    width: 100%;
+}
+
+.contact-form-card {
+    background-color: var(--color-form-bg); 
+    border-radius: 20px; 
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1); 
+    padding: 25px; 
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px; 
+}
+
+.form-header {
+    font-size: 24px; 
+    font-weight: 700;
+    color: var(--color-text-dark);
+    margin-bottom: 10px; 
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 5px; 
+}
+
+.form-label {
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--color-label);
+}
+
+.form-input,
+.form-textarea {
+    border: 1px solid #ddd;
+    border-radius: 8px; 
+    padding: 10px 12px; 
+    font-size: 14px; 
+    color: var(--color-text-dark);
+    width: 100%;
+}
+.form-textarea {
+    min-height: 90px; 
+    resize: vertical;
+}
+
+.submit-button-wrapper {
+    display: flex;
+    justify-content: flex-end; 
+    margin-top: 15px;
+}
+
+.submit-button {
+    background-color: var(--color-button); 
+    color: #ffffff;
+    border-radius: 10px;
+    padding: 8px 20px; 
+    font-size: 16px; 
+    font-weight: 700;
+    cursor: pointer;
+    border: none;
+    transition: background-color 0.3s;
+    min-width: 130px; 
+}
+.submit-button:hover {
+    background-color: #0d0b26;
+}
+
+.simple-footer-placeholder {
+    width: 100%;
+    padding: 40px 20px; 
+    background-color: var(--color-navy-dark); 
+    margin-top: 60px;
+}
+
+.footer-content-wrapper {
+    max-width: 1000px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: left; 
+    text-align: left; 
+}
+
+.footer-brand-text {
+    font-size: 36px; 
+    font-weight: 800; 
+    color: #ffffff; 
+    margin-bottom: 25px; 
+    letter-spacing: 1.5px; 
+}
+
+.footer-logo {
+    display: none; 
+}
+
+.footer-contact-details {
+    display: flex;
+    flex-direction: column; 
+    
+    align-items: left; 
+    
+    gap: 15px; 
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1); 
+    width: 100%; 
+}
+
+.footer-contact-details .contact-item {
+    text-align: left;
+}
+
+.footer-contact-details .item-label {
+    font-size: 17px;
+    font-weight: 600;
+    color: var(--color-footer-text);
+}
+
+.footer-contact-details .item-value {
+    font-size: 15px;
+    font-weight: 400;
+    color: var(--color-footer-text);
+}
+
+.footer-copyright {
+    font-size: 14px; 
+    font-weight: 400;
+    color: var(--color-footer-text);
+    margin-top: 20px;
+}
+
+@media (max-width: 700px) {
+    .contact-title {
+        font-size: 30px;
+    }
+    .contact-main-wrapper {
+        max-width: 90%; 
+    }
+    .contact-form-card {
+        padding: 20px; 
+    }
+    .submit-button-wrapper {
+        justify-content: center; 
+    }
+    .footer-contact-details {
+        flex-direction: column;
+        gap: 15px;
+    }
+    .footer-brand-text {
+        font-size: 30px;
+    }
+}
+
+.custom-notification {
+    position: fixed;
+    top: -100px; 
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #4CAF50; 
+    color: white;
+    padding: 15px 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    opacity: 0;
+    transition: top 0.4s ease-out, opacity 0.4s ease-out; 
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    max-width: 90%; 
+}
+
+.custom-notification.active {
+    top: 30px; 
+    opacity: 1;
+}
+
+.notification-icon {
+    font-size: 24px;
+}
+
+.notification-message {
+    font-size: 16px;
+    font-weight: 500;
+}
