@@ -18,15 +18,22 @@ const LoginPage = () => {
         setLoading(true);
 
         try {
+            // Pemanggilan ini akan menjadi: BaseURL + /auth/login
+            // Contoh: .../api/auth/login
             const response = await api.post('/auth/login', { email, password });
+            
             const { token, user } = response.data;
            
             login(token, user.role, user.name); 
             alert(`🎉 Selamat datang, ${user.name}!`);
             
+            // Redirect sesuai role dari database
             navigate(user.role === 'admin' ? '/admin/dashboard' : '/dashboard');
         } catch (err) {
-            setError(err.response?.data?.message || 'Login gagal. Cek email/password.');
+            console.error('Login Error:', err);
+            // Menangkap pesan error dari backend atau pesan default
+            const errorMessage = err.response?.data?.message || 'Endpoint tidak ditemukan. Pastikan URL API benar.';
+            setError(`❌ ${errorMessage}`);
         } finally {
             setLoading(false);
         }

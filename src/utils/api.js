@@ -1,10 +1,11 @@
 import axios from 'axios';
 
-// Mengambil URL dari .env yang tadi kita buat
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:4000/api';
-
 const api = axios.create({
-    baseURL: API_URL,
+    // Pastikan ada folder /api di akhir URL ini
+    baseURL: 'https://uasbackend-production-ae20.up.railway.app/api',
+    headers: {
+        'Content-Type': 'application/json'
+    }
 });
 
 export default api;
