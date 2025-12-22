@@ -5,7 +5,7 @@ import './DetailAktivitas.css';
 import { activityImages } from './assetsmaps'; 
 
 // Gunakan port 4000 sesuai dengan terminal backend kamu
-const API_URL = 'http://localhost:4000/api/activities'; 
+const API_URL = 'https://uasbackend-production-ae20.up.railway.app/api/activities'; 
 
 const DetailAktivitas = () => {
     const { id } = useParams();
