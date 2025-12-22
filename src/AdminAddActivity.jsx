@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './AdminAddActivity.css'; 
 
-const API_BASE_URL = 'https://uasbackendpemweb-production-b27f.up.railway.app/api';
+const API_BASE_URL = 'https://uasbackend-production-ae20.up.railway.app/api';
 const API_URL = API_BASE_URL; 
 
 const API_POST_ACTIVITY = `${API_BASE_URL}/admin/activities`; 

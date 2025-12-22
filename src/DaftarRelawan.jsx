@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate, useLocation } from 'react-router-dom';
 import axios from 'axios';
 import './DaftarRelawan.css'; 
-const API_BASE_URL = 'https://uasbackendpemweb-production-b27f.up.railway.app/api';
+const API_BASE_URL = 'https://uasbackend-production-ae20.up.railway.app/api';
 const API_URL = API_BASE_URL; 
 const initialFormData = {
     namaLengkap: '',

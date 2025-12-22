@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios'; 
 import './Kontak.css'; 
 
-const API_BASE_URL = 'https://uasbackendpemweb-production-b27f.up.railway.app/api';
+const API_BASE_URL = 'https://uasbackend-production-ae20.up.railway.app/api';
 const API_URL = API_BASE_URL; 
 function Kontak() {
     const [formData, setFormData] = useState({ 
