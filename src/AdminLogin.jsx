@@ -4,10 +4,11 @@ import axios from 'axios';
 import { AuthContext } from './AuthContext'; 
 import './LoginPage.css'; 
 
+// URL Backend Railway yang aktif saat ini
 const API_BASE_URL = 'https://uasbackend-production-ae20.up.railway.app/api';
-const API_URL = API_BASE_URL; 
-const AdminLogin = () => {
+const API_LOGIN_URL = `${API_BASE_URL}/auth/login`; 
 
+const AdminLogin = () => {
     const [credentials, setCredentials] = useState({ email: '', password: '' });
     const [error, setError] = useState('');
     
@@ -24,6 +25,7 @@ const AdminLogin = () => {
         setError('');
         
         try {
+            // Menggunakan API_LOGIN_URL yang sudah didefinisikan
             const response = await axios.post(API_LOGIN_URL, {
                 email: credentials.email,
                 password: credentials.password,
@@ -31,23 +33,19 @@ const AdminLogin = () => {
 
             const { token, user } = response.data;
             
+            // Validasi role admin di sisi frontend
             if (user.role !== 'admin') {
                 setError('Akses ditolak: Hanya pengguna Admin yang bisa login di sini.');
                 return;
             }
 
             login(token, user.role, user.name || 'Admin'); 
-
             alert(`✅ Login Admin Berhasil! Selamat datang, ${user.name || 'Admin'}.`);
-            
             navigate('/admin/dashboard');
 
         } catch (err) {
             console.error('Login Error:', err);
-            const errorMessage = err.response && err.response.data && err.response.data.message 
-                                ? err.response.data.message 
-                                : 'Gagal terhubung ke server atau terjadi kesalahan tak terduga.';
-            
+            const errorMessage = err.response?.data?.message || 'Gagal terhubung ke server atau terjadi kesalahan tak terduga.';
             setError(`❌ ${errorMessage}`);
         }
     };
@@ -65,7 +63,6 @@ const AdminLogin = () => {
                         <div className="masuk-akun-satu-aksi">Panel Admin</div>
                     </div>
                     
-                    {/* menampilkan pesan error */}
                     {error && <div className="error-message">{error}</div>}
 
                     <form onSubmit={handleAdminLogin} className="login-form">

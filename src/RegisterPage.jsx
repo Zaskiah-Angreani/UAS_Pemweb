@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import api from './utils/api'; 
+import axios from 'axios'; 
 import './LoginPage.css';
+
+// URL Backend Railway yang aktif saat ini
+const API_REGISTER_URL = 'https://uasbackend-production-ae20.up.railway.app/api/auth/register';
 
 const RegisterPage = () => {
     const [formData, setFormData] = useState({
@@ -36,12 +39,13 @@ const RegisterPage = () => {
         };
 
         try {
-            // Menggunakan api.js yang mengarah ke localhost:4000
-            const response = await api.post('/auth/register', userData);
+            // Langsung memanggil URL Railway untuk menghindari error localhost
+            await axios.post(API_REGISTER_URL, userData);
             alert(`✅ Pendaftaran berhasil! Silakan login.`);
             navigate('/login');
         } catch (err) {
-            const errorMessage = err.response?.data?.message || 'Gagal mendaftar.';
+            console.error('Register Error:', err);
+            const errorMessage = err.response?.data?.message || 'Gagal mendaftar ke server.';
             setError(`❌ ${errorMessage}`);
         } finally {
             setIsLoading(false);
@@ -70,12 +74,10 @@ const RegisterPage = () => {
                             <label>{isAdmin ? 'Username Admin' : 'Nama Lengkap'}</label>
                             <input className="input-field" type="text" name="nama" value={formData.nama} onChange={handleChange} required />
                         </div>
-                        {!isAdmin && (
-                            <div className="input-group">
-                                <label>Email</label>
-                                <input className="input-field" type="email" name="email" value={formData.email} onChange={handleChange} required />
-                            </div>
-                        )}
+                        <div className="input-group">
+                            <label>Email</label>
+                            <input className="input-field" type="email" name="email" value={formData.email} onChange={handleChange} required />
+                        </div>
                         <div className="input-group">
                             <label>Password</label>
                             <input className="input-field" type="password" name="password" value={formData.password} onChange={handleChange} required />
