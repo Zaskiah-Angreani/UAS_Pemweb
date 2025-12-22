@@ -5,7 +5,7 @@ import './Aktivitas.css';
 import { activityImages } from './assetsmaps'; 
 
 // Menggunakan URL lokal sesuai dengan terminal port 4000 Anda
-const API_URL = 'http://localhost:4000/api/activities'; 
+const API_URL = 'https://uasbackend-production-ae20.up.railway.app/api/activities'; 
 
 const ActivityCard = ({ title, category, location, event_day, event_time, description, image_url, id }) => {
     
