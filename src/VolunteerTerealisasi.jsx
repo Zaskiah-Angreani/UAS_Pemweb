@@ -1,11 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
 import axios from 'axios';
-import './VolunteerTerealisasi.css'; 
+import { Link } from 'react-router-dom';
 import { activityImages } from './assetsmaps'; 
-
-// PERBAIKAN: Gunakan endpoint /activities sesuai app.js
-const API_URL = 'https://uasbackend-production-ae20.up.railway.app/api/activities';
+import './VolunteerTerealisasi.css';
 
 const VolunteerTerealisasi = () => {
     const [completedActivities, setCompletedActivities] = useState([]);
@@ -13,28 +10,31 @@ const VolunteerTerealisasi = () => {
     const [error, setError] = useState(null);
 
     useEffect(() => {
-        const fetchCompletedActivities = async () => {
+        const fetchCompleted = async () => {
             try {
                 setLoading(true);
-                const response = await axios.get(API_URL); 
+                // Menghubungi endpoint /api/activities
+                const response = await axios.get('https://uasbackend-production-ae20.up.railway.app/api/activities');
                 
-                // Filter data yang statusnya 'selesai' dari tabel volunteers
-                const completedData = response.data.filter(activity => activity.status === 'selesai');
+                const allData = response.data;
 
-                setCompletedActivities(completedData);
-                setError(null);
+                // Filter data: pastikan status ada dan isinya adalah 'selesai'
+                const filtered = allData.filter(act => 
+                    act.status && act.status.toLowerCase() === 'selesai'
+                );
+
+                setCompletedActivities(filtered);
             } catch (err) {
-                console.error("Gagal mengambil data:", err);
-                setError("Gagal memuat kegiatan terealisasi. Pastikan rute /api/activities tersedia.");
+                console.error("Gagal memuat data:", err);
+                setError("Koneksi ke server gagal. Pastikan Backend di Railway sudah aktif.");
             } finally {
                 setLoading(false);
             }
         };
+        fetchCompleted();
+    }, []);
 
-        fetchCompletedActivities();
-    }, []); 
-
-    if (loading) return <div className="terealisasi-page-container"><p>Memuat data...</p></div>;
+    if (loading) return <div className="terealisasi-page-container"><p>Memuat kegiatan...</p></div>;
     if (error) return <div className="terealisasi-page-container"><p className="error-message">{error}</p></div>;
 
     return (
@@ -45,9 +45,7 @@ const VolunteerTerealisasi = () => {
             </header>
 
             <div className="kegiatan-list-grid">
-                {completedActivities.length === 0 ? (
-                    <p className="no-results-message">Belum ada kegiatan yang selesai.</p>
-                ) : (
+                {completedActivities.length > 0 ? (
                     completedActivities.map((kegiatan) => (
                         <Link key={kegiatan.id} to={`/aktivitas/${kegiatan.id}`} className="kegiatan-card-link">
                             <div className="kegiatan-terealisasi-card">
@@ -71,6 +69,11 @@ const VolunteerTerealisasi = () => {
                             </div>
                         </Link>
                     ))
+                ) : (
+                    <div className="no-data">
+                        <p>Belum ada kegiatan yang terealisasi.</p>
+                        <p className="hint">Tips: Pastikan di Database Neon, kolom 'status' bernilai 'selesai'.</p>
+                    </div>
                 )}
             </div>
         </div>
