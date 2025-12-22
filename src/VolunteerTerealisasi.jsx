@@ -1,8 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
+import './VolunteerTerealisasi.css'; 
 import { activityImages } from './assetsmaps'; 
-import './VolunteerTerealisasi.css';
+
+// PERBAIKAN: Pastikan URL mengarah ke endpoint /activities
+const API_BASE_URL = 'https://uasbackend-production-ae20.up.railway.app/api';
+const API_URL = `${API_BASE_URL}/activities`; 
 
 const VolunteerTerealisasi = () => {
     const [completedActivities, setCompletedActivities] = useState([]);
@@ -10,70 +14,93 @@ const VolunteerTerealisasi = () => {
     const [error, setError] = useState(null);
 
     useEffect(() => {
-        const fetchCompleted = async () => {
+        const fetchCompletedActivities = async () => {
             try {
                 setLoading(true);
-                // Menghubungi endpoint /api/activities
-                const response = await axios.get('https://uasbackend-production-ae20.up.railway.app/api/activities');
+                // Mengambil data dari backend
+                const response = await axios.get(API_URL); 
                 
-                const allData = response.data;
-
-                // Filter data: pastikan status ada dan isinya adalah 'selesai'
-                const filtered = allData.filter(act => 
-                    act.status && act.status.toLowerCase() === 'selesai'
+                const allData = Array.isArray(response.data) ? response.data : [];
+               
+                // PERBAIKAN: Filter lebih kuat (mengatasi huruf kapital & spasi)
+                const completedData = allData.filter(activity => 
+                    activity.status && activity.status.trim().toLowerCase() === 'selesai'
                 );
 
-                setCompletedActivities(filtered);
+                setCompletedActivities(completedData);
+                setError(null);
+
             } catch (err) {
-                console.error("Gagal memuat data:", err);
-                setError("Koneksi ke server gagal. Pastikan Backend di Railway sudah aktif.");
+                console.error("Gagal mengambil data kegiatan terealisasi:", err);
+                setError("Gagal memuat kegiatan terealisasi dari server.");
             } finally {
                 setLoading(false);
             }
         };
-        fetchCompleted();
-    }, []);
 
-    if (loading) return <div className="terealisasi-page-container"><p>Memuat kegiatan...</p></div>;
-    if (error) return <div className="terealisasi-page-container"><p className="error-message">{error}</p></div>;
+        fetchCompletedActivities();
+    }, []); 
+
+    if (loading) {
+        return <div className="terealisasi-page-container"><p>Memuat kegiatan yang sudah selesai...</p></div>;
+    }
+
+    if (error) {
+        return <div className="terealisasi-page-container"><p className="error-message">{error}</p></div>;
+    }
 
     return (
         <div className="terealisasi-page-container">
             <header className="terealisasi-header">
                 <h1>Kegiatan Sukarelawan Terealisasi</h1>
-                <p>Dampak nyata dari setiap aksi bersama.</p>
+                <p>Lihat dampak nyata dari setiap aksi yang telah kita lakukan bersama.</p>
             </header>
 
             <div className="kegiatan-list-grid">
-                {completedActivities.length > 0 ? (
-                    completedActivities.map((kegiatan) => (
-                        <Link key={kegiatan.id} to={`/aktivitas/${kegiatan.id}`} className="kegiatan-card-link">
-                            <div className="kegiatan-terealisasi-card">
-                                <div className="card-image-wrapper">
-                                    <img 
-                                        src={activityImages[kegiatan.image_url] || activityImages['placeholder.jpg']} 
-                                        alt={kegiatan.title} 
-                                        className="card-image"
-                                    /> 
-                                </div>
-                                <div className="card-content">
-                                    <h2>{kegiatan.title}</h2>
-                                    <p className="card-meta">
-                                        <span>📅 {kegiatan.event_day}</span> | <span>📍 {kegiatan.location}</span>
-                                    </p>
-                                    <p className="card-deskripsi">{kegiatan.description}</p>
-                                    <div className="button-wrapper-right">
-                                        <button className="detail-button">DETAIL</button>
+                {completedActivities.length === 0 ? (
+                    <div className="no-results-message">
+                        <p>Belum ada kegiatan sukarelawan yang terealisasi saat ini.</p>
+                        <small>Pastikan status di database sudah diatur ke 'selesai'.</small>
+                    </div>
+                ) : (
+                    completedActivities.map((kegiatan) => {
+                        // Memetakan gambar dari assetsmaps
+                        const imageSource = activityImages[kegiatan.image_url] || activityImages['placeholder.jpg'];
+
+                        return (
+                            <Link 
+                                key={kegiatan.id} 
+                                to={`/aktivitas/${kegiatan.id}`} 
+                                className="kegiatan-card-link"
+                            >
+                                <div className="kegiatan-terealisasi-card">
+                                    <div className="card-image-wrapper">
+                                        <img src={imageSource} alt={kegiatan.title} className="card-image"/> 
+                                    </div>
+                                    
+                                    <div className="card-content">
+                                        <h2>{kegiatan.title}</h2>
+                                        <p className="card-meta">
+                                            <span>📅 {kegiatan.event_day || 'Tanggal tidak tersedia'}</span> | 
+                                            <span> 📍 {kegiatan.location || 'Lokasi belum ditentukan'}</span>
+                                        </p>
+                                        <p className="card-deskripsi">
+                                            {kegiatan.description ? 
+                                                (kegiatan.description.substring(0, 100) + '...') : 
+                                                'Deskripsi singkat tidak tersedia.'
+                                            }
+                                        </p>
+                                        
+                                        <div className="button-wrapper-right">
+                                            <button className="detail-button">
+                                                DETAIL 
+                                            </button>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        </Link>
-                    ))
-                ) : (
-                    <div className="no-data">
-                        <p>Belum ada kegiatan yang terealisasi.</p>
-                        <p className="hint">Tips: Pastikan di Database Neon, kolom 'status' bernilai 'selesai'.</p>
-                    </div>
+                            </Link>
+                        );
+                    })
                 )}
             </div>
         </div>
