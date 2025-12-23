@@ -98,35 +98,32 @@ const KonfirmasiPendaftaran = () => {
         console.log('📦 Data yang dikirim:', relawanData);
 
         try {
-            const response = await fetch(API_REGISTRATION_URL, {
-                method: 'POST',
-                body: dataToSend,
-                // JANGAN tambahkan Content-Type header saat pakai FormData!
-                // Browser akan set otomatis dengan boundary yang benar
-            });
+    const response = await fetch(API_REGISTRATION_URL, {
+        method: 'POST',
+        body: dataToSend,
+    });
 
-            const result = await response.json();
-            console.log('📥 Response dari server:', result);
+    const result = await response.json();
+    console.log('📥 Response:', result);
 
-            if (!response.ok) {
-                throw new Error(result.message || result.detail || "Gagal mengirim pendaftaran.");
-            }
+    if (!response.ok) {
+        throw new Error(result.message || "Gagal mengirim pendaftaran.");
+    }
 
-            // 5. REDIRECT KE HALAMAN SUKSES
-            navigate(`/pendaftaran-sukses/${finalActivityId}`, { 
-                state: { 
-                    namaLengkap: formData.namaLengkap, 
-                    programTitle: programTitle,
-                    registrationId: result.data?.id
-                }
-            });
-
-        } catch (error) {
-            console.error("❌ Submission Error:", error);
-            setSubmissionError(error.message || 'Terjadi kesalahan saat mengirim data');
-        } finally {
-            setIsSubmitting(false);
+    // Sukses - langsung redirect
+    navigate(`/pendaftaran-sukses/${finalActivityId}`, { 
+        state: { 
+            namaLengkap: formData.namaLengkap,
+            programTitle: programTitle
         }
+    });
+
+} catch (error) {
+    console.error("❌ Error:", error);
+    setSubmissionError(error.message);
+} finally {
+    setIsSubmitting(false);
+}
     };
     
     return (
