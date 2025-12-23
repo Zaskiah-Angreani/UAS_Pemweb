@@ -1,120 +1,82 @@
-:root {
-    --color-page-bg: #fbf0f0; 
-    --color-primary: #100e2f;    
-    --color-text-dark: #000000;
-    --color-button: #17143a;
-    --color-white: #ffffff;
-    --color-border-light: #ddd;
-}
-
 .detail-page-wrapper {
-    background: var(--color-page-bg);
+    background: #fbf0f0;
     min-height: 100vh;
-    /* Jarak atas agar konten berada di bawah Navbar global */
-    padding-top: 130px; 
+    padding-top: 100px; /* Jarak agar tidak tertutup Navbar global */
 }
 
 .content-area {
-    max-width: 1200px;
+    max-width: 1000px;
     margin: 0 auto;
-    padding: 0 20px 60px 20px; 
+    padding-bottom: 50px;
 }
 
 .main-title {
-    color: var(--color-primary);
+    color: #100e2f;
     text-align: center;
-    font-family: "Poppins-ExtraBold", sans-serif;
-    font-size: 56px;
+    font-size: 48px;
     font-weight: 800;
-    margin-bottom: 10px;
+    margin-bottom: 5px;
 }
 
 .tagline {
-    color: var(--color-primary);
-    text-align: center; 
-    font-family: "Poppins-MediumItalic", sans-serif;
-    font-size: 32px;
+    color: #100e2f;
+    text-align: center;
+    font-size: 24px;
     font-style: italic;
     margin-bottom: 40px;
 }
 
 .summary-section {
     display: flex;
-    gap: 40px;
-    align-items: flex-start;
-    margin-bottom: 50px;
-    background: var(--color-white);
-    padding: 25px;
+    gap: 30px;
+    background: white;
+    padding: 20px;
     border-radius: 15px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    margin-bottom: 30px;
+    align-items: center;
 }
 
 .summary-image {
-    border-radius: 12px;
-    width: 45%; 
-    height: 350px; 
+    width: 40%;
+    height: 250px;
     object-fit: cover;
+    border-radius: 10px;
 }
 
 .description-text {
-    width: 55%; 
-    color: var(--color-primary);
-    text-align: justify; 
-    font-family: "Poppins-Medium", sans-serif;
-    font-size: 20px;
+    width: 60%;
+    font-size: 18px;
     line-height: 1.6;
 }
 
-.detail-list {
-    display: flex;
-    flex-direction: column;
-    gap: 5px; 
-}
-
 .detail-row {
-    background: var(--color-white); 
-    padding: 20px 40px;
-    border: 1px solid var(--color-border-light);
+    background: white;
+    padding: 20px 30px;
+    border-bottom: 1px solid #eee;
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    font-size: 22px;
 }
 
-.detail-label, .detail-value {
-    color: var(--color-text-dark);
-    font-family: "Poppins-Medium", sans-serif;
-    font-size: 24px; 
-    font-weight: 500;
+.detail-label {
+    font-weight: 600;
+    color: #333;
 }
 
-/* Status khusus untuk warna hijau */
-.detail-value:contains("Selesai"), .detail-value:contains("selesai") {
+/* Membuat status menjadi warna hijau */
+.status-green {
     color: #28a745;
     font-weight: bold;
-}
-
-.button-footer {
-    text-align: center;
-    margin-top: 60px;
+    text-transform: lowercase;
 }
 
 .back-button {
-    background: var(--color-button);
-    color: var(--color-white);
-    border-radius: 10px;
-    padding: 20px 80px;
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
+    background: #17143a;
+    color: white;
+    padding: 15px 60px;
+    border-radius: 8px;
     text-decoration: none;
-    font-family: "Poppins-Bold", sans-serif;
-    font-size: 28px;
-    font-weight: 700;
-}
-
-@media (max-width: 900px) {
-    .summary-section { flex-direction: column; }
-    .summary-image, .description-text { width: 100%; }
-    .main-title { font-size: 40px; }
-    .detail-label, .detail-value { font-size: 18px; }
+    font-weight: bold;
+    font-size: 24px;
+    display: inline-block;
 }
