@@ -1,86 +1,94 @@
 .detail-page-wrapper {
     background-color: #fbf0f0;
     min-height: 100vh;
-    padding: 140px 20px 80px;
+    padding: 130px 20px 80px; /* Jarak agar tidak tertutup navbar */
+    font-family: 'Poppins', sans-serif;
 }
 
 .content-area {
-    max-width: 1100px;
+    max-width: 1000px;
     margin: 0 auto;
 }
 
 .main-title {
-    font-size: 52px;
+    font-size: 50px;
     font-weight: 800;
     color: #100e2f;
     text-align: center;
-    margin-bottom: 10px;
+    margin-bottom: 5px;
 }
 
 .tagline {
-    font-size: 26px;
+    font-size: 24px;
     font-style: italic;
     color: #100e2f;
     text-align: center;
-    margin-bottom: 50px;
+    margin-bottom: 40px;
 }
 
-/* KOTAK DESKRIPSI (Gambar Kiri, Teks Kanan) */
+/* KOTAK PUTIH UNTUK GAMBAR & DESKRIPSI */
 .summary-card {
     display: flex;
     background: #ffffff;
-    border-radius: 20px;
+    border-radius: 15px;
     overflow: hidden;
-    margin-bottom: 40px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-    min-height: 350px;
+    margin-bottom: 30px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
 }
 
-.image-container {
-    width: 45%; /* Ambil 45% lebar */
+.image-side {
+    width: 45%;
+    line-height: 0;
 }
 
-.summary-image {
+.img-fluid {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    min-height: 250px;
 }
 
-.description-container {
+.text-side {
     width: 55%;
-    padding: 40px;
+    padding: 30px;
     display: flex;
     align-items: center;
 }
 
-.description-text {
-    font-size: 20px;
+.desc-text {
+    font-size: 18px;
     line-height: 1.6;
     color: #100e2f;
 }
 
-/* TABEL INFO (Kotak Putih untuk Baris) */
-.info-table {
+/* LIST INFORMASI (TABEL) */
+.detail-container {
     background: #ffffff;
-    border-radius: 15px;
+    border-radius: 10px;
     overflow: hidden;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+    box-shadow: 0 2px 10px rgba(0,0,0,0.03);
 }
 
-.info-row {
+.detail-item-row {
     display: flex;
     justify-content: space-between;
-    padding: 20px 40px;
-    border-bottom: 1px solid #f0f0f0;
+    padding: 18px 35px;
+    border-bottom: 1px solid #f2f2f2;
 }
 
-.info-label {
+.detail-item-row:last-child {
+    border-bottom: none;
+}
+
+.label-text {
     font-weight: 700;
-    font-size: 22px;
+    font-size: 20px;
+    color: #333;
 }
 
-.info-value {
-    font-size: 22px;
+.value-text {
+    font-size: 20px;
+    color: #000;
 }
 
 .status-green {
@@ -88,14 +96,24 @@
     font-weight: bold;
 }
 
-.btn-back {
+/* TOMBOL KEMBALI */
+.action-area {
+    margin-top: 40px;
+}
+
+.btn-back-custom {
     background: #17143a;
     color: white;
-    padding: 15px 60px;
-    border-radius: 10px;
+    padding: 14px 50px;
+    border-radius: 8px;
     text-decoration: none;
     font-weight: bold;
-    font-size: 24px;
+    font-size: 22px;
     display: inline-block;
-    margin-top: 40px;
+}
+
+.loading-state {
+    padding: 200px;
+    text-align: center;
+    font-size: 24px;
 }
