@@ -1,113 +1,195 @@
-.detail-page-wrapper {
-    background-color: #fbf0f0; /* Warna background soft pink seperti desain */
-    min-height: 100vh;
-    padding: 130px 20px 80px;
+:root {
+    --color-page-bg: #f7f7f7;    
+    --color-primary: #172554;    
+    --color-secondary: #f0f0f5;  
+    --color-accent: #3b82f6;     
+    --color-text-dark: #333333;
+    --color-text-light: #ffffff;
+    --color-border: #e0e0e0;
+    --color-white: #ffffff; 
 }
 
-.content-area {
-    max-width: 1000px;
+.detail-page-wrapper {
+    background: var(--color-page-bg);
+    min-height: 100vh;
+    padding-top: 60px; 
+    font-family: 'Poppins', sans-serif; 
+}
+
+.content-area { 
+    max-width: 850px; 
     margin: 0 auto;
+    padding: 10px 20px 40px 20px; 
 }
 
 .main-title {
-    font-size: 48px;
-    font-weight: 800;
-    color: #100e2f;
+    color: var(--color-primary);
     text-align: center;
-    margin-bottom: 5px;
+    font-size: 28px; 
+    font-weight: 700;
+    margin-top: 5px; 
+    margin-bottom: 5px; 
 }
 
 .tagline {
-    font-size: 24px;
-    font-style: italic;
-    color: #100e2f;
+    color: var(--color-text-dark);
     text-align: center;
-    margin-bottom: 40px;
+    font-size: 16px; 
+    font-style: italic;
+    font-weight: 400;
+    margin-bottom: 25px; 
 }
 
-/* KOTAK DESKRIPSI (Gaya Card) */
-.summary-card-container {
+.summary-section {
     display: flex;
-    background: #ffffff;
-    border-radius: 20px;
-    overflow: hidden;
-    margin-bottom: 30px;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.05);
-    min-height: 300px;
+    gap: 15px; 
+    align-items: flex-start;
+    margin-bottom: 25px;
+    padding: 15px; 
+    background: var(--color-white); 
+    border-radius: 6px;
+    box-shadow: 0 1px 6px rgba(0,0,0,0.05); 
 }
 
-.image-side {
-    width: 45%;
-}
-
-.img-main {
-    width: 100%;
-    height: 100%;
+.summary-image {
+    width: 250px; 
+    max-width: 35%;
+    height: 180px; 
     object-fit: cover;
+    border-radius: 4px;
+    flex-shrink: 0;
 }
 
-.text-side {
-    width: 55%;
-    padding: 40px;
+.description-text { 
+    color: var(--color-text-dark);
+    font-size: 15px; 
+    font-weight: 400;
+    line-height: 1.5;
+    flex-grow: 1;
+    padding-top: 5px;
+    text-align: justify;
+}
+
+.detail-list-container {
+    background: var(--color-white);
+    padding: 15px; 
+    border-radius: 6px;
+    box-shadow: 0 1px 6px rgba(0,0,0,0.05); 
+}
+
+.detail-list-title {
+    font-size: 16px; 
+    font-weight: 700;
+    color: var(--color-primary);
+    margin-bottom: 10px;
+    border-bottom: 1px solid var(--color-border);
+    padding-bottom: 5px;
+}
+
+.detail-list {
     display: flex;
-    align-items: center;
+    flex-direction: column;
+    gap: 1px; 
+    border: 1px solid var(--color-border);
+    border-radius: 4px;
+    overflow: hidden; 
 }
 
-.description-text-p {
-    font-size: 18px;
-    line-height: 1.6;
-    color: #100e2f;
+.detail-row:nth-child(odd) {
+    background: var(--color-secondary); 
+}
+.detail-row:nth-child(even) {
+    background: var(--color-white); 
 }
 
-/* LIST INFO TERTATA */
-.info-table-container {
-    background: #ffffff;
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.02);
-}
-
-.info-row-item {
+.detail-row {
+    padding: 10px 15px; 
     display: flex;
     justify-content: space-between;
-    padding: 20px 40px;
-    border-bottom: 1px solid #f2f2f2;
+    align-items: center;
+    border-bottom: 1px solid var(--color-border);
 }
 
-.info-label-txt {
-    font-weight: 700;
-    font-size: 22px;
-    color: #333;
+.detail-label, .detail-value {
+    color: var(--color-text-dark);
+    font-size: 13px; 
+    font-weight: 500;
 }
 
-.info-value-txt {
-    font-size: 22px;
-    color: #000;
+.detail-value {
+    font-weight: 600;
+    color: var(--color-primary); 
 }
 
-.status-green-txt {
-    color: #28a745 !important;
-    font-weight: bold;
+.button-footer {
+    text-align: center;
+    margin-top: 30px; 
 }
 
-/* BUTTON KEMBALI DI TENGAH */
-.footer-button-container {
-    margin-top: 40px;
-    display: flex;
+.back-button {
+    background: var(--color-primary);
+    color: var(--color-text-light);
+    border-radius: 6px;
+    padding: 10px 20px; 
+    display: inline-flex;
     justify-content: center;
-}
-
-.btn-kembali-final {
-    background: #17143a; /* Navy sesuai desain */
-    color: #ffffff;
-    padding: 15px 80px;
-    border-radius: 10px;
+    align-items: center;
     text-decoration: none;
-    font-weight: bold;
-    font-size: 24px;
-    transition: background 0.3s;
+    font-size: 15px; 
+    font-weight: 600;
+    transition: background-color 0.3s;
 }
 
-.btn-kembali-final:hover {
-    background: #24205a;
+.back-button:hover {
+    background: #2a396e; 
+}
+
+@media (max-width: 768px) {
+    .detail-page-wrapper {
+        padding-top: 50px; 
+    }
+    .content-area {
+        padding: 10px 15px 30px 15px;
+    }
+
+    .main-title {
+        font-size: 22px;
+        margin-top: 5px; 
+    }
+    .tagline {
+        font-size: 14px;
+        margin-bottom: 20px;
+    }
+
+    .summary-section {
+        flex-direction: column;
+        gap: 10px;
+        padding: 10px;
+    }
+    .summary-image {
+        width: 100%;
+        max-width: 100%;
+        height: auto;
+    }
+    .description-text {
+        font-size: 13px;
+    }
+   
+    .detail-row {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 8px 10px;
+    }
+    .detail-label, .detail-value {
+        font-size: 13px;
+        width: 100%;
+        text-align: left;
+    }
+    .detail-value {
+        font-weight: 600;
+        color: var(--color-text-dark);
+    }
+    .back-button {
+        font-size: 13px;
+    }
 }

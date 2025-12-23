@@ -26,15 +26,19 @@ const DetailVolunteer = () => {
         if (id) fetchDetail();
     }, [id]);
 
-    if (loading) return <div className="loading-state">Memuat...</div>;
-    if (!kegiatan) return <div className="error-state">Data tidak ditemukan.</div>;
+    if (loading) return <div style={{padding: '200px', textAlign: 'center'}}>Memuat Detail...</div>;
+    if (!kegiatan) return <div style={{padding: '200px', textAlign: 'center'}}>Data tidak ditemukan.</div>;
+
+    // MEMBERSIHKAN NAMA GAMBAR: Menghilangkan spasi atau karakter aneh agar terbaca di public folder
+    const cleanImageName = kegiatan.image_url ? kegiatan.image_url.trim() : 'volunteer3.jpg';
+    const imagePath = cleanImageName.startsWith('http') ? cleanImageName : `/${cleanImageName}`;
 
     const detailItems = [
         { label: "Jumlah Relawan", value: kegiatan.target_volunteer || "35 Orang" },
         { label: "Tanggal Pelaksanaan", value: kegiatan.event_day || "-" },
         { label: "Lokasi", value: kegiatan.location || "-" },
         { label: "Waktu Pelaksanaan", value: kegiatan.event_time || "09:00 WIB" },
-        { label: "Total Jam Pelaksanaan", value: kegiatan.total_hours || "-" },
+        { label: "Total Jam Pelaksanaan", value: kegiatan.total_hours || "3 Jam 30 Menit" },
         { label: "Status Program", value: kegiatan.status || "selesai" },
         { label: "Jumlah Penerima Manfaat", value: kegiatan.beneficiaries || "Siswa-siswi SD" },
     ];
@@ -45,35 +49,35 @@ const DetailVolunteer = () => {
                 <h1 className="main-title">{kegiatan.title}</h1>
                 <p className="tagline">Masa Depan yang Lebih Baik</p>
               
-                {/* CARD UTAMA UNTUK GAMBAR & DESKRIPSI */}
-                <div className="summary-card-container">
-                    <div className="image-side">
+                {/* KOTAK RINGKASAN: GAMBAR & DESKRIPSI */}
+                <div className="final-card-summary">
+                    <div className="final-image-box">
                         <img 
-                            src={`/${kegiatan.image_url}`} 
-                            alt="Preview" 
-                            className="img-main"
-                            onError={(e) => e.target.src = 'https://via.placeholder.com/500x300?text=Gambar+Kegiatan'}
+                            src={imagePath} 
+                            alt="Volunteer Activity" 
+                            className="final-img-fluid"
+                            onError={(e) => { e.target.src = 'https://via.placeholder.com/500x300?text=Cek+Folder+Public'; }}
                         />
                     </div>
-                    <div className="text-side">
-                         <p className="description-text-p">{kegiatan.description}</p>
+                    <div className="final-text-box">
+                         <p className="final-desc-p">{kegiatan.description}</p>
                     </div>
                 </div>
 
-                {/* TABEL INFORMASI DALAM KOTAK PUTIH */}
-                <div className="info-table-container">
+                {/* TABEL INFORMASI */}
+                <div className="final-table-box">
                     {detailItems.map((item, index) => (
-                        <div key={index} className="info-row-item">
-                            <span className="info-label-txt">{item.label}:</span>
-                            <span className={`info-value-txt ${item.value.toLowerCase().includes('selesai') ? 'status-green-txt' : ''}`}>
+                        <div key={index} className="final-row-item">
+                            <span className="final-label">{item.label}:</span>
+                            <span className={`final-value ${item.value.toLowerCase().includes('selesai') ? 'final-status-green' : ''}`}>
                                 {item.value}
                             </span>
                         </div>
                     ))}
                 </div>
                 
-                <div className="footer-button-container">
-                    <Link to="/volunteer-terealisasi" className="btn-kembali-final">Kembali</Link>
+                <div className="final-button-wrapper">
+                    <Link to="/volunteer-terealisasi" className="final-btn-back">Kembali</Link>
                 </div>
             </div>
         </div>
