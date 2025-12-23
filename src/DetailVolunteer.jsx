@@ -1,110 +1,83 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import './DetailVolunteer.css'; 
+import axios from 'axios';
+import './VolunteerDetailProgram.css'; 
 
-import MainImage1 from './assets/volunteer8.jpg'; 
-import ImageVolunteer9 from './assets/volunteer9.jpg'; 
-import ImageVolunteer10 from './assets/volunteer10.jpg'; 
+// Import asset yang terbukti ada di folder Anda
+import LogoImage from './assets/logo_satuaksi-removebg-preview.png'; 
+import { activityImages } from './assetsmaps'; 
 
-const kegiatanLengkap = [
-    { 
-        id: 1, 
-        judul: "Profil Volunteer",
-        tagline: "Belajar Ceria untuk Masa Depan",
-        image: MainImage1, 
-        deskripsi: "Program ini mengajak relawan untuk mendampingi anak-anak SD dalam proses belajar, mulai dari membaca, berhitung, hingga tugas sekolah. Melalui pendekatan yang menyenangkan dan interaktif, relawan membantu meningkatkan kepercayaan diri dan semangat belajar anak-anak agar mereka dapat meraih masa depan yang lebih cerah.",
-        detailItems: [
-            { label: "Jumlah Relawan", value: "35 Orang" },
-            { label: "Tanggal Pelaksanan", value: "12 Januari 2025" },
-            { label: "Lokasi", value: "Sekolah Dasar Negeri 060809, Medan" },
-            { label: "Waktu Pelakasaan", value: "07.30 - 11.00" },
-            { label: "Total Jam Pelaksanaan", value: "3 Jam 30 Menit" },
-            { label: "Status Program", value: "Selesai" },
-            { label: "Jumlah Penerima Manfaat", value: "Siswa-siswi kelas 2 SD" },
-        ]
-    },
-   
-    { 
-        id: 2, 
-        judul: "Aksi Bersih Lingkungan: Jaga Alam Kita.",
-        tagline: "Setiap aksi kecil yang dilakukan membawa dampak besar bagi bumi yang lebih sehat.",
-        image: ImageVolunteer9, 
-        deskripsi: "Program ini mengajak relawan untuk bersama-sama membersihkan area alam yang tercemar sampah. Melalui kegiatan gotong royong ini, para relawan berkontribusi menjaga keindahan dan kebersihan lingkungan, sekaligus meningkatkan kesadaran masyarakat tentang pentingnya menjaga kelestarian alam. Setiap aksi kecil yang dilakukan membawa dampak besar bagi bumi yang lebih sehat.",
-        detailItems: [
-            { label: "Jumlah Relawan", value: "30 Orang" },
-            { label: "Tanggal Pelaksanan", value: "4 November 2024" },
-            { label: "Lokasi", value: "Taman Wisata Alam (TWA) Sibolangit" },
-            { label: "Waktu Pelakasaan", value: "08.00 - 14.00" },
-            { label: "Total Jam Pelaksanaan", value: "6 Jam" },
-            { label: "Status Program", value: "Selesai" },
-            { label: "Jumlah Penerima Manfaat", value: "Masyarakat sekitar" },
-        ]
-    },
-   
-    { 
-        id: 3, 
-        judul: "Pantai Bersih, Laut Terjaga",
-        tagline: "pentingnya menjaga kebersihan lingkungan pesisir.",
-        image: ImageVolunteer10, 
-        deskripsi: "Program ini mengajak relawan untuk bersama-sama membersihkan area pantai dari sampah plastik dan limbah yang mencemari lingkungan. Melalui kerja sama dan kepedulian, kegiatan ini bertujuan menjaga keindahan pantai, melindungi ekosistem laut, serta meningkatkan kesadaran masyarakat tentang pentingnya menjaga kebersihan lingkungan pesisir.",
-        detailItems: [
-            { label: "Jumlah Relawan", value: "50 Orang" },
-            { label: "Tanggal Pelaksanan", value: "1 Februari 2025" },
-            { label: "Lokasi", value: "Pantai Bali Lestari, Serdang Bedagai" },
-            { label: "Waktu Pelakasaan", value: "07.00 - 12.00" },
-            { label: "Total Jam Pelaksanaan", value: " 5 Jam" },
-            { label: "Status Program", value: "Selesai" },
-            { label: "Jumlah Penerima Manfaat", value: "Lingkungan dan Masyarakat Lokal" },
-        ]
-    }
-];
+const API_BASE_URL = 'https://uasbackend-production-ae20.up.railway.app/api';
 
 const DetailVolunteer = () => {
-    const { id } = useParams();
-    const kegiatan = kegiatanLengkap.find(k => k.id === parseInt(id)); 
-    
-    if (!kegiatan) {
-        return (
-            <div className="detail-page-wrapper" style={{textAlign: 'center', paddingTop: '80px'}}>
-                <h1>Kegiatan Detail Tidak Ditemukan</h1>
-                <Link to="/volunteer-terealisasi">Kembali ke Daftar Kegiatan</Link>
-            </div>
-        );
-    }
+    const { id } = useParams(); // Mengambil ID dari URL
+    const [kegiatan, setKegiatan] = useState(null);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+
+    useEffect(() => {
+        const fetchDetail = async () => {
+            try {
+                setLoading(true);
+                // Mengambil data kegiatan spesifik dari database
+                const response = await axios.get(`${API_BASE_URL}/activities/${id}`);
+                const data = response.data.data || response.data;
+                setKegiatan(data);
+            } catch (err) {
+                console.error("Gagal memuat detail:", err);
+                setError("Detail kegiatan tidak ditemukan.");
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        if (id) fetchDetail();
+    }, [id]);
+
+    if (loading) return <div className="loading">Memuat detail program...</div>;
+    if (error || !kegiatan) return <div className="error">{error}</div>;
+
+    const imageSource = activityImages[kegiatan.image_url] || activityImages['placeholder.jpg'];
 
     return (
         <div className="detail-page-wrapper">
-            
+            <header className="main-header">
+                <div className="header-logo-wrapper">
+                    <img src={LogoImage} alt="Logo" className="header-logo" />
+                </div>
+                <nav className="header-nav">
+                    <Link to="/" className="nav-item">Beranda</Link>
+                    <Link to="/volunteer-terealisasi" className="nav-item">Aktivitas Selesai</Link>
+                </nav>
+            </header>
+
             <div className="content-area">
-                
-                <h1 className="main-title">{kegiatan.judul}</h1>
-                <h2 className="tagline">{kegiatan.tagline}</h2>
-                
+                <h1 className="main-title">{kegiatan.title}</h1>
+                <h2 className="tagline">{kegiatan.tagline || "Masa Depan yang Lebih Baik"}</h2>
+              
                 <section className="summary-section">
-                    <img src={kegiatan.image} alt={kegiatan.judul} className="summary-image" />
-                    <p className="description-text">
-                        {kegiatan.deskripsi}
-                    </p>
+                    <img src={imageSource} alt={kegiatan.title} className="summary-image" />
+                    <p className="description-text">{kegiatan.description}</p>
                 </section>
 
-                <section className="detail-list-container"> 
-                    <h3 className="detail-list-title">Detail Pelaksanaan Program</h3>
-                    <div className="detail-list">
-                        {kegiatan.detailItems.map((item, index) => (
-                            <div key={index} className="detail-row">
-                                <span className="detail-label">{item.label}</span>
-                                <span className="detail-value">{item.value}</span>
-                            </div>
-                        ))}
+                <section className="detail-list">
+                    <div className="detail-row">
+                        <span className="detail-label">Lokasi:</span>
+                        <span className="detail-value">{kegiatan.location}</span>
+                    </div>
+                    <div className="detail-row">
+                        <span className="detail-label">Tanggal Selesai:</span>
+                        <span className="detail-value">{kegiatan.event_day}</span>
+                    </div>
+                    <div className="detail-row">
+                        <span className="detail-label">Status:</span>
+                        <span className="detail-value" style={{color: 'green', fontWeight: 'bold'}}>{kegiatan.status}</span>
                     </div>
                 </section>
                 
                 <div className="button-footer">
-                    <Link to="/volunteer-terealisasi" className="back-button">
-                        ← Kembali ke Daftar Program
-                    </Link>
+                    <Link to="/volunteer-terealisasi" className="back-button">Kembali</Link>
                 </div>
-
             </div>
         </div>
     );
