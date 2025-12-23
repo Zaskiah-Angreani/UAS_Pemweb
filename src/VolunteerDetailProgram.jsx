@@ -1,73 +1,75 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
+import axios from 'axios';
 import './VolunteerDetailProgram.css'; 
 
-// Data tetap dipertahankan agar fungsi .find() berjalan
-const kegiatanLengkap = [
-    { 
-        id: 1, 
-        judul: "Profil Volunteer",
-        tagline: "Belajar Ceria untuk Masa Depan",
-        deskripsi: "Program ini mengajak relawan untuk mendampingi anak-anak SD dalam proses belajar, mulai dari membaca, berhitung, hingga tugas sekolah. Melalui pendekatan yang menyenangkan dan interaktif, relawan membantu meningkatkan kepercayaan diri dan semangat belajar anak-anak agar mereka dapat meraih masa depan yang lebih cerah.",
-        detailItems: [
-            { label: "Jumlah Relawan", value: "35 Orang" },
-            { label: "Tanggal Pelaksanaan", value: "12 Januari 2025" },
-            { label: "Lokasi", value: "Sekolah Dasar Negeri 060809, Medan" },
-            { label: "Waktu Pelaksanaan", value: "07.30 - 11.00" },
-            { label: "Total Jam Pelaksanaan", value: "3 Jam 30 Menit" },
-            { label: "Status Program", value: "Selesai" },
-            { label: "Jumlah Penerima Manfaat", value: "Siswa-siswi kelas 2 SD" },
-        ]
-    },
-    { 
-        id: 2, 
-        judul: "Relawan Mengajar Anak Desa",
-        tagline: "Membangun Literasi dari Pelosok",
-        deskripsi: "Membantu anak-anak belajar membaca dan memberikan motivasi pendidikan di area Bogor.",
-        detailItems: [
-            { label: "Jumlah Relawan", value: "10 Orang" },
-            { label: "Tanggal Pelaksanaan", value: "10 Januari 2026" },
-            { label: "Lokasi", value: "Bogor, Jawa Barat" },
-            { label: "Waktu Pelaksanaan", value: "09.00 - 15.00" },
-            { label: "Total Jam Pelaksanaan", value: "6 Jam" },
-            { label: "Status Program", value: "Selesai" },
-            { label: "Jumlah Penerima Manfaat", value: "Anak-anak Desa" },
-        ]
-    }
-];
+// Menggunakan URL Backend Railway Anda
+const API_BASE_URL = 'https://uasbackend-production-ae20.up.railway.app/api';
 
 const VolunteerDetailProgram = () => {
-    const { id } = useParams();
-    
-    // Mencari kegiatan berdasarkan ID dari URL secara dinamis
-    const kegiatan = kegiatanLengkap.find(k => k.id === parseInt(id)); 
-    
-    if (!kegiatan) {
+    const { id } = useParams(); // Mengambil ID dari URL secara dinamis
+    const [kegiatan, setKegiatan] = useState(null);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+
+    useEffect(() => {
+        const fetchDetailData = async () => {
+            try {
+                setLoading(true);
+                // Mengambil data spesifik dari API berdasarkan ID
+                const response = await axios.get(`${API_BASE_URL}/activities/${id}`);
+                
+                // Menangani struktur data dari backend
+                const data = response.data.data || response.data;
+                setKegiatan(data);
+                setError(null);
+            } catch (err) {
+                console.error("Gagal memuat detail kegiatan:", err);
+                setError("Data kegiatan tidak ditemukan atau server bermasalah.");
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        if (id) fetchDetailData();
+    }, [id]);
+
+    if (loading) return <div className="loading-state">Memuat detail kegiatan...</div>;
+
+    if (error || !kegiatan) {
         return (
-            <div className="detail-page-wrapper" style={{textAlign: 'center', paddingTop: '50px'}}>
-                <h1>Detail Kegiatan Tidak Ditemukan</h1>
+            <div className="error-container" style={{textAlign: 'center', paddingTop: '100px'}}>
+                <h2>{error || "Kegiatan Tidak Ditemukan"}</h2>
                 <Link to="/volunteer-terealisasi">Kembali ke Daftar Kegiatan</Link>
             </div>
         );
     }
 
+    // Mapping data dinamis dari database untuk ditampilkan di list detail
+    const detailItems = [
+        { label: "Tanggal Pelaksanaan", value: kegiatan.event_day || "Belum ditentukan" },
+        { label: "Lokasi", value: kegiatan.location || "Lokasi belum tersedia" },
+        { label: "Status Program", value: kegiatan.status || "Selesai" },
+        { label: "Target Relawan", value: kegiatan.target_volunteer || "-" },
+        { label: "Penerima Manfaat", value: kegiatan.beneficiaries || "Siswa/Warga Lokal" }
+    ];
+
     return (
         <div className="detail-page-wrapper">
-            {/* Header telah dihapus sesuai permintaan */}
+            {/* Header dan Logo dihapus agar menggunakan Navbar global dari App.js */}
             
             <div className="content-area">
-                <h1 className="main-title">{kegiatan.judul}</h1>
-                <h2 className="tagline">{kegiatan.tagline}</h2>
+                <h1 className="main-title">{kegiatan.title}</h1>
+                <h2 className="tagline">{kegiatan.tagline || "Membangun Masa Depan Bersama"}</h2>
               
                 <section className="summary-section">
-                    {/* Gambar dihapus dari tampilan sesuai permintaan */}
                     <p className="description-text">
-                        {kegiatan.deskripsi}
+                        {kegiatan.description}
                     </p>
                 </section>
 
                 <section className="detail-list">
-                    {kegiatan.detailItems.map((item, index) => (
+                    {detailItems.map((item, index) => (
                         <div key={index} className="detail-row">
                             <span className="detail-label">{item.label}:</span>
                             <span className="detail-value">{item.value}</span>
