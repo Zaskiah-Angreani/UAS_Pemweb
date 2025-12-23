@@ -29,15 +29,15 @@ const DetailVolunteer = () => {
     if (loading) return <div className="loading-state">Memuat Detail...</div>;
     if (!kegiatan) return <div className="error-state">Data tidak ditemukan.</div>;
 
-    // Logika pengambilan gambar dari folder public
-    const imagePath = kegiatan.image_url ? `/${kegiatan.image_url}` : '/volunteer3.jpg';
+    // Cara memanggil gambar dari folder PUBLIC
+    const imageSource = kegiatan.image_url ? `/${kegiatan.image_url}` : '/volunteer3.jpg';
 
     const detailItems = [
         { label: "Jumlah Relawan", value: kegiatan.target_volunteer || "35 Orang" },
         { label: "Tanggal Pelaksanaan", value: kegiatan.event_day || "-" },
         { label: "Lokasi", value: kegiatan.location || "-" },
         { label: "Waktu Pelaksanaan", value: kegiatan.event_time || "08:00 WIB" },
-        { label: "Total Jam Pelaksanaan", value: kegiatan.total_hours || "-" },
+        { label: "Total Jam Pelaksanaan", value: kegiatan.total_hours || "3 Jam 30 Menit" },
         { label: "Status Program", value: kegiatan.status || "selesai" },
         { label: "Jumlah Penerima Manfaat", value: kegiatan.beneficiaries || "Siswa-siswi SD" },
     ];
@@ -48,35 +48,35 @@ const DetailVolunteer = () => {
                 <h1 className="main-title">{kegiatan.title}</h1>
                 <p className="tagline">Masa Depan yang Lebih Baik</p>
               
-                {/* KOTAK DESKRIPSI UTAMA */}
-                <div className="summary-card">
-                    <div className="image-side">
+                {/* Bagian Deskripsi: Gambar Kiri, Teks Kanan */}
+                <div className="card-summary">
+                    <div className="card-image-box">
                         <img 
-                            src={imagePath} 
-                            alt="Preview" 
-                            className="img-fluid"
-                            onError={(e) => e.target.src = 'https://via.placeholder.com/500x300?text=Gambar+Tidak+Ditemukan'}
+                            src={imageSource} 
+                            alt="Volunteer" 
+                            className="card-img"
+                            onError={(e) => e.target.src = 'https://via.placeholder.com/500x300?text=Gambar+Kegiatan'}
                         />
                     </div>
-                    <div className="text-side">
-                         <p className="desc-text">{kegiatan.description}</p>
+                    <div className="card-text-box">
+                         <p className="description-p">{kegiatan.description}</p>
                     </div>
                 </div>
 
-                {/* TABEL DETAIL */}
-                <div className="detail-container">
+                {/* Bagian List Detail */}
+                <div className="list-container">
                     {detailItems.map((item, index) => (
-                        <div key={index} className="detail-item-row">
-                            <span className="label-text">{item.label}:</span>
-                            <span className={`value-text ${item.value.toLowerCase() === 'selesai' ? 'status-green' : ''}`}>
+                        <div key={index} className="list-row">
+                            <span className="label-txt">{item.label}:</span>
+                            <span className={`value-txt ${item.value.toLowerCase().includes('selesai') ? 'status-active' : ''}`}>
                                 {item.value}
                             </span>
                         </div>
                     ))}
                 </div>
                 
-                <div className="action-area">
-                    <Link to="/volunteer-terealisasi" className="btn-back-custom">Kembali</Link>
+                <div className="footer-nav">
+                    <Link to="/volunteer-terealisasi" className="back-btn-new">Kembali</Link>
                 </div>
             </div>
         </div>
