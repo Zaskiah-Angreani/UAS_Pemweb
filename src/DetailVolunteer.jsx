@@ -6,7 +6,7 @@ const API_BASE_URL = 'https://uasbackend-production-ae20.up.railway.app/api';
 
 // FUNGSI MAPPING GAMBAR BERDASARKAN ID
 const getImagePath = (kegiatan) => {
-    if (!kegiatan) return '/volunteer1.jpg';
+    if (!kegiatan) return '/volunteer3.jpg';
     
     // Cek image_url dari API
     if (kegiatan.image_url && kegiatan.image_url.trim() !== '') {
@@ -17,18 +17,18 @@ const getImagePath = (kegiatan) => {
     
     // Mapping berdasarkan ID
     const imageMap = {
-        1: '/volunteer4.jpg',
-        2: '/volunteer5.jpg',
-        3: '/volunteer3.jpg'
+        1: '/volunteer3.jpg',
+        2: '/volunteer4.jpg',
+        3: '/volunteer5.jpg'
     };
     
     // Cek dari judul juga (URUTAN PENTING!)
     const title = kegiatan.title?.toLowerCase() || '';
     if (title.includes('mengajar') || title.includes('anak')) return '/volunteer3.jpg';
     if (title.includes('mangrove') || title.includes('tanam')) return '/volunteer4.jpg';
-    if (title.includes('hijau')) return '/volunteer3.jpg';
+    if (title.includes('hijau')) return '/volunteer5.jpg';
     
-    return imageMap[kegiatan.id] || '/volunteer5.jpg';
+    return imageMap[kegiatan.id] || '/volunteer3.jpg';
 };
 
 const DetailVolunteer = () => {
