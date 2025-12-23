@@ -1,8 +1,9 @@
 import React from 'react';
 import { useParams, Link } from 'react-router-dom';
 import './VolunteerDetailProgram.css'; 
+// Mengimpor komponen Navbar dari file Navbar.jsx
+import Navbar from './Navbar'; 
 
-import LogoImage from './assets/logo_satuaksi-removebg-preview.png'; 
 import MainImage1 from './assets/volunteer4.jpg'; 
 
 const kegiatanLengkap = [
@@ -58,32 +59,25 @@ const kegiatanLengkap = [
 
 const VolunteerDetailProgram = () => {
     const { id } = useParams();
-    const kegiatan = kegiatanLengkap.find(k => k.id === 1); 
+    // Mencari data berdasarkan id dari URL, jika tidak ada default ke id 1
+    const kegiatan = kegiatanLengkap.find(k => k.id === parseInt(id)) || kegiatanLengkap[0]; 
     
     if (!kegiatan) {
         return (
-            <div className="detail-page-wrapper" style={{textAlign: 'center', paddingTop: '150px'}}>
-                <h1>Kegiatan Detail Tidak Ditemukan</h1>
-                <Link to="/volunteer-terealisasi">Kembali ke Daftar Kegiatan</Link>
+            <div className="detail-page-wrapper">
+                <Navbar />
+                <div style={{textAlign: 'center', paddingTop: '150px'}}>
+                    <h1>Kegiatan Detail Tidak Ditemukan</h1>
+                    <Link to="/volunteer-terealisasi">Kembali ke Daftar Kegiatan</Link>
+                </div>
             </div>
         );
     }
 
     return (
         <div className="detail-page-wrapper">
-           
-            <header className="main-header">
-                <div className="header-logo-wrapper">
-                    <img src={LogoImage} alt="Logo" className="header-logo" />
-                </div>
-                <nav className="header-nav">
-                    <Link to="/beranda" className="nav-item">Beranda</Link>
-                    <Link to="/tentang" className="nav-item">Tentang</Link>
-                    <Link to="/aktivitas" className="nav-item">Aktivitas</Link>
-                    <Link to="/kontak" className="nav-item">Kontak</Link>
-                    <Link to="/login" className="nav-item login">Login</Link>
-                </nav>
-            </header>
+            {/* Memanggil komponen Navbar */}
+            <Navbar />
 
             <div className="content-area">
                 
