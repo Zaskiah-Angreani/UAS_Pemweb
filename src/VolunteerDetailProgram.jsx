@@ -29,7 +29,7 @@ const VolunteerDetailProgram = () => {
     if (loading) return <div className="loading-state">Memuat...</div>;
     if (!kegiatan) return <div className="error-state">Data tidak ditemukan.</div>;
 
-    // Menampilkan semua detail yang Anda minta secara lengkap
+    // Menampilkan 7 baris keterangan sesuai permintaan Anda
     const detailItems = [
         { label: "Jumlah Relawan", value: kegiatan.target_volunteer || "35 Orang" },
         { label: "Tanggal Pelaksanaan", value: kegiatan.event_day || "-" },
@@ -42,11 +42,13 @@ const VolunteerDetailProgram = () => {
 
     return (
         <div className="detail-page-wrapper">
-            {/* Logo SatuAksi besar di tengah sudah dihapus dari sini */}
+            {/* CATATAN: Di sini tidak boleh ada <header>, <Navbar />, atau <img> logo.
+               Komponen ini akan langsung menampilkan judul kegiatan. 
+            */}
             
             <div className="content-area">
                 <h1 className="main-title">{kegiatan.title}</h1>
-                <h2 className="tagline">{kegiatan.tagline || "Masa Depan yang Lebih Baik"}</h2>
+                <h2 className="tagline">{kegiatan.tagline || "Membangun Masa Depan Bersama"}</h2>
               
                 <section className="summary-section">
                     <img 
@@ -54,16 +56,16 @@ const VolunteerDetailProgram = () => {
                         alt="Foto Kegiatan" 
                         className="summary-image" 
                     />
-                    <p className="description-text">
-                        {kegiatan.description}
-                    </p>
+                    <div className="description-container">
+                         <p className="description-text">{kegiatan.description}</p>
+                    </div>
                 </section>
 
                 <section className="detail-list">
                     {detailItems.map((item, index) => (
                         <div key={index} className="detail-row">
                             <span className="detail-label">{item.label}:</span>
-                            <span className={`detail-value ${item.label === 'Status Program' ? 'status-green' : ''}`}>
+                            <span className={`detail-value ${item.value.toLowerCase() === 'selesai' ? 'status-green' : ''}`}>
                                 {item.value}
                             </span>
                         </div>
