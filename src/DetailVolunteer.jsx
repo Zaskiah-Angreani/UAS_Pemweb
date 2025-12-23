@@ -17,18 +17,18 @@ const getImagePath = (kegiatan) => {
     
     // Mapping berdasarkan ID
     const imageMap = {
-        1: '/volunteer1.jpg',
-        2: '/volunteer2.jpg',
+        1: '/volunteer4.jpg',
+        2: '/volunteer5.jpg',
         3: '/volunteer3.jpg'
     };
     
     // Cek dari judul juga (URUTAN PENTING!)
     const title = kegiatan.title?.toLowerCase() || '';
-    if (title.includes('mengajar') || title.includes('anak')) return '/volunteer1.jpg';
-    if (title.includes('mangrove') || title.includes('tanam')) return '/volunteer2.jpg';
+    if (title.includes('mengajar') || title.includes('anak')) return '/volunteer3.jpg';
+    if (title.includes('mangrove') || title.includes('tanam')) return '/volunteer4.jpg';
     if (title.includes('hijau')) return '/volunteer3.jpg';
     
-    return imageMap[kegiatan.id] || '/volunteer1.jpg';
+    return imageMap[kegiatan.id] || '/volunteer5.jpg';
 };
 
 const DetailVolunteer = () => {
