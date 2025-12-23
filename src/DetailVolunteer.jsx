@@ -22,11 +22,11 @@ const getImagePath = (kegiatan) => {
         3: '/volunteer3.jpg'
     };
     
-    // Cek dari judul juga
+    // Cek dari judul juga (URUTAN PENTING!)
     const title = kegiatan.title?.toLowerCase() || '';
     if (title.includes('mengajar') || title.includes('anak')) return '/volunteer1.jpg';
     if (title.includes('mangrove') || title.includes('tanam')) return '/volunteer2.jpg';
-    if (title.includes('hijau') || title.includes('aksi')) return '/volunteer3.jpg';
+    if (title.includes('hijau')) return '/volunteer3.jpg';
     
     return imageMap[kegiatan.id] || '/volunteer1.jpg';
 };
