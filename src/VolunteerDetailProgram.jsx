@@ -2,7 +2,7 @@ import React from 'react';
 import { useParams, Link } from 'react-router-dom';
 import './VolunteerDetailProgram.css'; 
 
-import LogoImage from './assets/volunteer2.png'; 
+import LogoImage from './assets/volunteer2.jpg'; 
 import MainImage1 from './assets/volunteer4.jpg'; 
 
 const kegiatanLengkap = [
