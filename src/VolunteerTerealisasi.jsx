@@ -1,106 +1,97 @@
-import React from 'react';
-import { useParams, Link } from 'react-router-dom';
-import './VolunteerDetailProgram.css'; 
+import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import axios from 'axios';
+import './VolunteerTerealisasi.css'; 
+import { activityImages } from './assetsmaps'; 
 
-import MainImage1 from './assets/volunteer4.jpg'; 
+const API_BASE_URL = 'https://uasbackend-production-ae20.up.railway.app/api';
+const API_URL = API_BASE_URL; 
+const VolunteerTerealisasi = () => {
+    const [completedActivities, setCompletedActivities] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
 
-const kegiatanLengkap = [
-    { 
-        id: 1, 
-        judul: "Profil Volunteer",
-        tagline: "Belajar Ceria untuk Masa Depan",
-        image: MainImage1, 
-        deskripsi: "Program ini mengajak relawan untuk mendampingi anak-anak SD dalam proses belajar, mulai dari membaca, berhitung, hingga tugas sekolah. Melalui pendekatan yang menyenangkan dan interaktif, relawan membantu meningkatkan kepercayaan diri dan semangat belajar anak-anak agar mereka dapat meraih masa depan yang lebih cerah.",
-        detailItems: [
-            { label: "Jumlah Relawan", value: "35 Orang" },
-            { label: "Tanggal Pelaksanan", value: "12 Januari 2025" },
-            { label: "Lokasi", value: "Sekolah Dasar Negeri 060809, Medan" },
-            { label: "Waktu Pelakasaan", value: "07.30 - 11.00" },
-            { label: "Total Jam Pelaksanaan", value: "3 Jam 30 Menit" },
-            { label: "Status Program", value: "Selesai" },
-            { label: "Jumlah Penerima Manfaat", value: "Siswa-siswi kelas 2 SD" },
-        ]
-    },
-    { 
-        id: 2, 
-        judul: "Profil Volunteer",
-        tagline: "Belajar Ceria untuk Masa Depan",
-        image: MainImage1, 
-        deskripsi: "Program ini mengajak relawan untuk mendampingi anak-anak SD dalam proses belajar, mulai dari membaca, berhitung, hingga tugas sekolah. Melalui pendekatan yang menyenangkan dan interaktif, relawan membantu meningkatkan kepercayaan diri dan semangat belajar anak-anak agar mereka dapat meraih masa depan yang lebih cerah.",
-        detailItems: [
-            { label: "Jumlah Relawan", value: "35 Orang" },
-            { label: "Tanggal Pelaksanan", value: "12 Januari 2025" },
-            { label: "Lokasi", value: "Sekolah Dasar Negeri 060809, Medan" },
-            { label: "Waktu Pelakasaan", value: "07.30 - 11.00" },
-            { label: "Total Jam Pelaksanaan", value: "3 Jam 30 Menit" },
-            { label: "Status Program", value: "Selesai" },
-            { label: "Jumlah Penerima Manfaat", value: "Siswa-siswi kelas 2 SD" },
-        ]
-    },
-    { 
-        id: 3, 
-        judul: "Profil Volunteer",
-        tagline: "Belajar Ceria untuk Masa Depan",
-        image: MainImage1, 
-        deskripsi: "Program ini mengajak relawan untuk mendampingi anak-anak SD dalam proses belajar, mulai dari membaca, berhitung, hingga tugas sekolah. Melalui pendekatan yang menyenangkan dan interaktif, relawan membantu meningkatkan kepercayaan diri dan semangat belajar anak-anak agar mereka dapat meraih masa depan yang lebih cerah.",
-        detailItems: [
-            { label: "Jumlah Relawan", value: "35 Orang" },
-            { label: "Tanggal Pelaksanan", value: "12 Januari 2025" },
-            { label: "Lokasi", value: "Sekolah Dasar Negeri 060809, Medan" },
-            { label: "Waktu Pelakasaan", value: "07.30 - 11.00" },
-            { label: "Total Jam Pelaksanaan", value: "3 Jam 30 Menit" },
-            { label: "Status Program", value: "Selesai" },
-            { label: "Jumlah Penerima Manfaat", value: "Siswa-siswi kelas 2 SD" },
-        ]
-    },
-];
+    useEffect(() => {
+        const fetchCompletedActivities = async () => {
+            try {
+                setLoading(true);
+                const response = await axios.get(API_URL); 
+                
+                const allData = response.data;
+               
+                const completedData = allData.filter(activity => activity.status === 'selesai');
 
-const VolunteerDetailProgram = () => {
-    const { id } = useParams();
-    const kegiatan = kegiatanLengkap.find(k => k.id === parseInt(id)) || kegiatanLengkap[0]; 
-    
-    if (!kegiatan) {
-        return (
-            <div className="detail-page-wrapper" style={{textAlign: 'center', paddingTop: '150px'}}>
-                <h1>Kegiatan Detail Tidak Ditemukan</h1>
-                <Link to="/volunteer-terealisasi">Kembali ke Daftar Kegiatan</Link>
-            </div>
-        );
+                setCompletedActivities(completedData);
+                setError(null);
+
+            } catch (err) {
+                console.error("Gagal mengambil data kegiatan terealisasi:", err);
+                setError("Gagal memuat kegiatan terealisasi dari server. Cek apakah backend berjalan.");
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchCompletedActivities();
+    }, []); 
+
+    if (loading) {
+        return <div className="terealisasi-page-container"><p>Memuat kegiatan yang sudah selesai...</p></div>;
+    }
+
+    if (error) {
+        return <div className="terealisasi-page-container"><p className="error-message">{error}</p></div>;
     }
 
     return (
-        <div className="detail-page-wrapper">
-            
-            <div className="content-area">
-                
-                <h1 className="main-title">{kegiatan.judul}</h1>
-                <h2 className="tagline">{kegiatan.tagline}</h2>
-              
-                <section className="summary-section">
-                    <img src={kegiatan.image} alt={kegiatan.judul} className="summary-image" />
-                    <p className="description-text">
-                        {kegiatan.deskripsi}
-                    </p>
-                </section>
+        <div className="terealisasi-page-container">
+            <header className="terealisasi-header">
+                <h1>Kegiatan Sukarelawan Terealisasi</h1>
+                <p>Lihat dampak nyata dari setiap aksi yang telah kita lakukan bersama.</p>
+            </header>
 
-                <section className="detail-list">
-                    {kegiatan.detailItems.map((item, index) => (
-                        <div key={index} className="detail-row">
-                            <span className="detail-label">{item.label}:</span>
-                            <span className="detail-value">{item.value}</span>
-                        </div>
-                    ))}
-                </section>
+            <div className="kegiatan-list-grid">
                 
-                <div className="button-footer">
-                    <Link to="/volunteer-terealisasi" className="back-button">
-                        Kembali
-                    </Link>
-                </div>
+                {completedActivities.length === 0 ? (
+                    <p className="no-results-message">Belum ada kegiatan sukarelawan yang terealisasi saat ini.</p>
+                ) : (
+                    completedActivities.map((kegiatan) => {
+                    
+                        const imageSource = activityImages[kegiatan.image_url] || activityImages['placeholder.jpg'];
 
+                        return (
+                            <Link 
+                                key={kegiatan.id} 
+                                to={`/aktivitas/${kegiatan.id}`} 
+                                className="kegiatan-card-link"
+                            >
+                                <div className="kegiatan-terealisasi-card">
+                                    <div className="card-image-wrapper">
+                                        <img src={imageSource} alt={kegiatan.title} className="card-image"/> 
+                                    </div>
+                                    
+                                    <div className="card-content">
+                                        <h2>{kegiatan.title}</h2>
+                                        <p className="card-meta">
+                                            <span>📅 {kegiatan.event_day || 'Tanggal tidak tersedia'}</span> | 
+                                            <span> 📍 {kegiatan.location || 'Lokasi belum ditentukan'}</span>
+                                        </p>
+                                        <p className="card-deskripsi">{kegiatan.description || 'Deskripsi singkat tidak tersedia.'}</p>
+                                        
+                                        <div className="button-wrapper-right">
+                                            <button className="detail-button">
+                                                DETAIL 
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </Link>
+                        );
+                    })
+                )}
             </div>
         </div>
     );
 };
 
-export default VolunteerDetailProgram;
+export default VolunteerTerealisasi;
