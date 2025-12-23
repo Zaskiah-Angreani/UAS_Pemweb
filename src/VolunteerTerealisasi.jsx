@@ -2,8 +2,8 @@ import React from 'react';
 import { useParams, Link } from 'react-router-dom';
 import './VolunteerDetailProgram.css'; 
 
-import LogoImage from './assets/gemini-logo-removebg-preview-2.png'; 
-import MainImage1 from './assets/image-13.jpg'; 
+import LogoImage from './assets/volunteer3.png'; 
+import MainImage1 from './assets/volunteer4.jpg'; 
 
 const kegiatanLengkap = [
     { 
