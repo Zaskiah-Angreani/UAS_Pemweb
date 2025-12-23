@@ -2,9 +2,8 @@ import React from 'react';
 import { useParams, Link } from 'react-router-dom';
 import './VolunteerDetailProgram.css'; 
 
-// Placeholder images (jika gambar tidak ada)
-const LogoImage = 'https://via.placeholder.com/150x50?text=Logo'; 
-const MainImage1 = 'https://via.placeholder.com/800x400?text=Program+Image'; 
+import LogoImage from './assets/gemini-logo-removebg-preview-2.png'; 
+import MainImage1 from './assets/image-13.jpg'; 
 
 const kegiatanLengkap = [
     { 
