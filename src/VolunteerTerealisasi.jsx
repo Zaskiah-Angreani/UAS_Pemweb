@@ -18,20 +18,18 @@ const VolunteerTerealisasi = () => {
             try {
                 setLoading(true);
                 
-                // PERBAIKAN: Menambahkan endpoint spesifik '/activities' agar tidak 404
+                // Mengambil data dari endpoint /activities
                 const response = await axios.get(`${API_BASE_URL}/activities`); 
                 
                 const allData = response.data;
                 
-                // Memastikan data adalah array sebelum difilter
+                // Logika pemfilteran berdasarkan status 'selesai' di database
                 if (Array.isArray(allData)) {
-                    // Filter kegiatan yang statusnya 'selesai'
                     const completedData = allData.filter(activity => 
                         activity.status === 'selesai' || activity.status === 'Selesai'
                     );
                     setCompletedActivities(completedData);
                 } else {
-                    // Jika BE mengirim objek dalam property 'data'
                     const dataArray = allData.data || [];
                     const completedData = dataArray.filter(activity => 
                         activity.status === 'selesai' || activity.status === 'Selesai'
@@ -42,8 +40,7 @@ const VolunteerTerealisasi = () => {
                 setError(null);
             } catch (err) {
                 console.error("Gagal mengambil data kegiatan terealisasi:", err);
-                // Menampilkan pesan error yang lebih spesifik jika server mati atau endpoint salah
-                setError("Gagal memuat kegiatan. Pastikan Backend di Railway sudah berjalan dan endpoint /api/activities tersedia.");
+                setError("Gagal memuat kegiatan. Cek koneksi ke Backend Railway.");
             } finally {
                 setLoading(false);
             }
@@ -83,13 +80,16 @@ const VolunteerTerealisasi = () => {
                     <p className="no-results-message">Belum ada kegiatan sukarelawan yang terealisasi saat ini.</p>
                 ) : (
                     completedActivities.map((kegiatan) => {
-                        // Mengambil gambar dari assetsmap atau gunakan placeholder jika tidak ada
                         const imageSource = activityImages[kegiatan.image_url] || activityImages['placeholder.jpg'];
 
                         return (
+                            /* PERBAIKAN UTAMA: 
+                               Path diganti dari '/aktivitas/' menjadi '/volunteer-terealisasi/detail/' 
+                               agar sesuai dengan rute DetailVolunteer di App.js 
+                            */
                             <Link 
                                 key={kegiatan.id} 
-                                to={`/aktivitas/${kegiatan.id}`} 
+                                to={`/volunteer-terealisasi/detail/${kegiatan.id}`} 
                                 className="kegiatan-card-link"
                             >
                                 <div className="kegiatan-terealisasi-card">
