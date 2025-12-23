@@ -3,6 +3,11 @@ import { useParams, Link } from 'react-router-dom';
 import axios from 'axios';
 import './VolunteerDetailProgram.css'; 
 
+// Import gambar manual agar terbaca oleh React
+import v3 from './assets/volunteer3.jpg'; 
+import v4 from './assets/volunteer4.jpg';
+import v5 from './assets/volunteer5.jpg';
+
 const API_BASE_URL = 'https://uasbackend-production-ae20.up.railway.app/api';
 
 const DetailVolunteer = () => {
@@ -10,32 +15,35 @@ const DetailVolunteer = () => {
     const [kegiatan, setKegiatan] = useState(null);
     const [loading, setLoading] = useState(true);
 
+    // Fungsi untuk memilih gambar berdasarkan data database
+    const getImage = (imgName) => {
+        if (!imgName) return v3;
+        if (imgName.includes('volunteer3')) return v3;
+        if (imgName.includes('volunteer4')) return v4;
+        if (imgName.includes('volunteer5')) return v5;
+        return imgName; // Jika isinya link URL (http)
+    };
+
     useEffect(() => {
-        const fetchDetailData = async () => {
+        const fetchDetail = async () => {
             try {
                 setLoading(true);
                 const response = await axios.get(`${API_BASE_URL}/activities/${id}`);
-                const data = response.data.data || response.data;
-                setKegiatan(data);
+                setKegiatan(response.data.data || response.data);
             } catch (err) {
-                console.error("Gagal memuat detail:", err);
+                console.error("Gagal memuat:", err);
             } finally {
                 setLoading(false);
             }
         };
-        if (id) fetchDetailData();
+        if (id) fetchDetail();
     }, [id]);
 
-    // Fungsi untuk menangani jika gambar gagal dimuat
-    const handleImageError = (e) => {
-        e.target.src = 'https://via.placeholder.com/800x600?text=Gambar+Kegiatan';
-    };
-
-    if (loading) return <div className="loading-state">Memuat detail kegiatan...</div>;
+    if (loading) return <div className="loading-state">Memuat...</div>;
     if (!kegiatan) return <div className="error-state">Data tidak ditemukan.</div>;
 
     const detailItems = [
-        { label: "Jumlah Relawan", value: kegiatan.target_volunteer ? `${kegiatan.target_volunteer} Orang` : "35 Orang" },
+        { label: "Jumlah Relawan", value: kegiatan.target_volunteer || "35 Orang" },
         { label: "Tanggal Pelaksanaan", value: kegiatan.event_day || "-" },
         { label: "Lokasi", value: kegiatan.location || "-" },
         { label: "Waktu Pelaksanaan", value: kegiatan.event_time || "-" },
@@ -50,14 +58,13 @@ const DetailVolunteer = () => {
                 <h1 className="main-title">{kegiatan.title}</h1>
                 <p className="tagline">{kegiatan.tagline || "Masa Depan yang Lebih Baik"}</p>
               
-                {/* Bagian Kartu Ringkasan (Gambar Kiri, Deskripsi Kanan) */}
+                {/* Pastikan class name summary-card ini ada agar CSS bekerja */}
                 <section className="summary-card">
                     <div className="image-container">
                         <img 
-                            src={kegiatan.image_url} 
-                            alt={kegiatan.title} 
+                            src={getImage(kegiatan.image_url)} 
+                            alt="Foto Kegiatan" 
                             className="summary-image" 
-                            onError={handleImageError}
                         />
                     </div>
                     <div className="description-container">
@@ -65,7 +72,7 @@ const DetailVolunteer = () => {
                     </div>
                 </section>
 
-                {/* Bagian Tabel Informasi */}
+                {/* Pastikan class name info-table ini ada agar kotak putih muncul */}
                 <div className="info-table">
                     {detailItems.map((item, index) => (
                         <div key={index} className="info-row">
