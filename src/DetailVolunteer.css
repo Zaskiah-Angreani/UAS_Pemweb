@@ -1,81 +1,133 @@
+/* Container Utama */
 .detail-page-wrapper {
-    background: #fbf0f0;
+    background-color: #fbf0f0;
     min-height: 100vh;
-    padding-top: 130px; /* Jarak agar konten di bawah navbar global App.jsx */
+    padding: 140px 20px 80px; /* Padding atas agar tidak tertutup Navbar */
 }
 
 .content-area {
     max-width: 1100px;
     margin: 0 auto;
-    padding: 20px;
 }
 
 .main-title {
+    font-size: 56px;
+    font-weight: 800;
     color: #100e2f;
     text-align: center;
-    font-size: 52px;
-    font-weight: 800;
     margin-bottom: 10px;
 }
 
 .tagline {
-    color: #100e2f;
-    text-align: center;
     font-size: 28px;
     font-style: italic;
+    color: #100e2f;
+    text-align: center;
     margin-bottom: 50px;
 }
 
-.summary-section {
+/* TATA LETAK: Flexbox untuk Gambar & Deskripsi */
+.summary-card {
     display: flex;
-    gap: 40px;
-    background: white;
-    padding: 30px;
+    background: #ffffff;
     border-radius: 20px;
+    overflow: hidden;
     margin-bottom: 40px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+    min-height: 400px; /* Memastikan kartu memiliki tinggi cukup */
+}
+
+.image-container {
+    flex: 1; 
+    max-width: 50%;
+    background-color: #eee; /* Warna dasar jika gambar loading */
 }
 
 .summary-image {
-    width: 45%;
-    height: 350px;
-    object-fit: cover;
-    border-radius: 15px;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Mencegah gambar gepeng */
+    display: block;
+}
+
+.description-container {
+    flex: 1;
+    padding: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #ffffff;
 }
 
 .description-text {
-    width: 55%;
     font-size: 20px;
-    line-height: 1.7;
-    text-align: justify;
+    line-height: 1.8;
+    color: #100e2f;
+    text-align: center;
 }
 
-.detail-row {
-    background: white;
-    padding: 20px 40px;
-    border: 1px solid #ddd;
+/* TABEL INFORMASI */
+.info-table {
+    background: #ffffff;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+}
+
+.info-row {
     display: flex;
     justify-content: space-between;
+    padding: 25px 50px;
+    border-bottom: 1px solid #f5f5f5;
+}
+
+.info-row:last-child {
+    border-bottom: none;
+}
+
+.info-label {
+    font-weight: 700;
     font-size: 24px;
+    color: #333;
 }
 
-.detail-label {
-    font-weight: 600;
+.info-value {
+    font-size: 24px;
+    color: #000;
 }
 
+/* Warna Hijau untuk Status Selesai */
 .status-green {
     color: #28a745 !important;
     font-weight: bold;
 }
 
-.back-button {
+/* Tombol Kembali */
+.footer-action {
+    margin-top: 50px;
+}
+
+.btn-back {
     background: #17143a;
-    color: white;
-    padding: 15px 80px;
+    color: #ffffff;
+    padding: 15px 60px;
     border-radius: 10px;
     text-decoration: none;
     font-weight: bold;
-    font-size: 28px;
+    font-size: 26px;
     display: inline-block;
-    margin-top: 40px;
+    transition: transform 0.2s;
+}
+
+.btn-back:hover {
+    transform: translateY(-3px);
+    background: #24205a;
+}
+
+/* Responsif untuk Mobile */
+@media (max-width: 768px) {
+    .summary-card { flex-direction: column; }
+    .image-container, .description-container { max-width: 100%; }
+    .main-title { font-size: 36px; }
+    .info-row { padding: 15px 20px; flex-direction: column; }
 }

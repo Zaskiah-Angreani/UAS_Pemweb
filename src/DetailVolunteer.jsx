@@ -14,7 +14,6 @@ const DetailVolunteer = () => {
         const fetchDetailData = async () => {
             try {
                 setLoading(true);
-                // Mengambil data berdasarkan ID dari API
                 const response = await axios.get(`${API_BASE_URL}/activities/${id}`);
                 const data = response.data.data || response.data;
                 setKegiatan(data);
@@ -27,16 +26,20 @@ const DetailVolunteer = () => {
         if (id) fetchDetailData();
     }, [id]);
 
-    if (loading) return <div style={{paddingTop: '150px', textAlign: 'center'}}>Memuat...</div>;
-    if (!kegiatan) return <div style={{paddingTop: '150px', textAlign: 'center'}}>Data tidak ditemukan.</div>;
+    // Fungsi untuk menangani jika gambar gagal dimuat
+    const handleImageError = (e) => {
+        e.target.src = 'https://via.placeholder.com/800x600?text=Gambar+Kegiatan';
+    };
 
-    // Data lengkap disesuaikan dengan kebutuhan Anda
+    if (loading) return <div className="loading-state">Memuat detail kegiatan...</div>;
+    if (!kegiatan) return <div className="error-state">Data tidak ditemukan.</div>;
+
     const detailItems = [
         { label: "Jumlah Relawan", value: kegiatan.target_volunteer ? `${kegiatan.target_volunteer} Orang` : "35 Orang" },
-        { label: "Tanggal Pelaksanaan", value: kegiatan.event_day || "Sabtu, 10 Jan 2026" },
-        { label: "Lokasi", value: kegiatan.location || "Bogor" },
-        { label: "Waktu Pelaksanaan", value: kegiatan.event_time || "07.30 - 11.00" },
-        { label: "Total Jam Pelaksanaan", value: kegiatan.total_hours || "3 Jam 30 Menit" },
+        { label: "Tanggal Pelaksanaan", value: kegiatan.event_day || "-" },
+        { label: "Lokasi", value: kegiatan.location || "-" },
+        { label: "Waktu Pelaksanaan", value: kegiatan.event_time || "-" },
+        { label: "Total Jam Pelaksanaan", value: kegiatan.total_hours || "-" },
         { label: "Status Program", value: kegiatan.status || "selesai" },
         { label: "Jumlah Penerima Manfaat", value: kegiatan.beneficiaries || "Siswa-siswi SD" },
     ];
@@ -45,32 +48,37 @@ const DetailVolunteer = () => {
         <div className="detail-page-wrapper">
             <div className="content-area">
                 <h1 className="main-title">{kegiatan.title}</h1>
-                <h2 className="tagline">{kegiatan.tagline || "Masa Depan yang Lebih Baik"}</h2>
+                <p className="tagline">{kegiatan.tagline || "Masa Depan yang Lebih Baik"}</p>
               
-                <section className="summary-section">
-                    <img 
-                        src={kegiatan.image_url || 'https://via.placeholder.com/600x400'} 
-                        alt="Preview" 
-                        className="summary-image" 
-                    />
+                {/* Bagian Kartu Ringkasan (Gambar Kiri, Deskripsi Kanan) */}
+                <section className="summary-card">
+                    <div className="image-container">
+                        <img 
+                            src={kegiatan.image_url} 
+                            alt={kegiatan.title} 
+                            className="summary-image" 
+                            onError={handleImageError}
+                        />
+                    </div>
                     <div className="description-container">
                          <p className="description-text">{kegiatan.description}</p>
                     </div>
                 </section>
 
-                <section className="detail-list">
+                {/* Bagian Tabel Informasi */}
+                <div className="info-table">
                     {detailItems.map((item, index) => (
-                        <div key={index} className="detail-row">
-                            <span className="detail-label">{item.label}:</span>
-                            <span className={`detail-value ${item.value.toLowerCase().includes('selesai') ? 'status-green' : ''}`}>
+                        <div key={index} className="info-row">
+                            <span className="info-label">{item.label}:</span>
+                            <span className={`info-value ${item.value.toLowerCase().includes('selesai') ? 'status-green' : ''}`}>
                                 {item.value}
                             </span>
                         </div>
                     ))}
-                </section>
+                </div>
                 
-                <div className="button-footer">
-                    <Link to="/volunteer-terealisasi" className="back-button">Kembali</Link>
+                <div className="footer-action">
+                    <Link to="/volunteer-terealisasi" className="btn-back">Kembali</Link>
                 </div>
             </div>
         </div>
