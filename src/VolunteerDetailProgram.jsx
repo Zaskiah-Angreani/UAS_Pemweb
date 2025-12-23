@@ -3,63 +3,90 @@ import { useParams, Link } from 'react-router-dom';
 import axios from 'axios';
 import './VolunteerDetailProgram.css'; 
 
+// URL Backend sesuai dengan screenshot Anda
 const API_BASE_URL = 'https://uasbackend-production-ae20.up.railway.app/api';
 
 const VolunteerDetailProgram = () => {
     const { id } = useParams();
     const [kegiatan, setKegiatan] = useState(null);
     const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
 
     useEffect(() => {
-        const fetchDetail = async () => {
+        const fetchDetailData = async () => {
             try {
-                // Mengambil data spesifik berdasarkan ID dari API Railway
+                setLoading(true);
+                // Mengambil data spesifik berdasarkan ID
                 const response = await axios.get(`${API_BASE_URL}/activities/${id}`);
-                setKegiatan(response.data.data || response.data);
+                const data = response.data.data || response.data;
+                setKegiatan(data);
+                setError(null);
             } catch (err) {
-                console.error("Gagal memuat data:", err);
+                console.error("Gagal memuat detail kegiatan:", err);
+                setError("Data kegiatan tidak ditemukan atau server bermasalah.");
             } finally {
                 setLoading(false);
             }
         };
-        fetchDetail();
+
+        if (id) fetchDetailData();
     }, [id]);
 
-    if (loading) return <div className="loading-state">Memuat informasi kegiatan...</div>;
-    if (!kegiatan) return <div className="error-state">Kegiatan tidak ditemukan.</div>;
+    if (loading) return <div className="loading-state">Memuat detail kegiatan...</div>;
+
+    if (error || !kegiatan) {
+        return (
+            <div className="error-container">
+                <h2>{error || "Kegiatan Tidak Ditemukan"}</h2>
+                <Link to="/volunteer-terealisasi">Kembali ke Daftar Kegiatan</Link>
+            </div>
+        );
+    }
+
+    // Mapping data sesuai dengan informasi yang Anda inginkan
+    const detailItems = [
+        { label: "Jumlah Relawan", value: kegiatan.target_volunteer ? `${kegiatan.target_volunteer} Orang` : "35 Orang" },
+        { label: "Tanggal Pelaksanaan", value: kegiatan.event_day || "-" },
+        { label: "Lokasi", value: kegiatan.location || "-" },
+        { label: "Waktu Pelaksanaan", value: kegiatan.event_time || "07.30 - 11.00" },
+        { label: "Total Jam Pelaksanaan", value: kegiatan.total_hours || "3 Jam 30 Menit" },
+        { label: "Status Program", value: kegiatan.status || "Selesai" },
+        { label: "Jumlah Penerima Manfaat", value: kegiatan.beneficiaries || "Siswa-siswi SD" },
+    ];
 
     return (
-        <div className="volunteer-detail-container">
-            {/* Navbar dihapus dari sini karena sudah ada di App.jsx */}
+        <div className="detail-page-wrapper">
+            {/* Header/Logo dihapus total agar menggunakan Navbar dari App.js */}
             
-            <div className="detail-content">
-                <h1 className="detail-title">{kegiatan.title}</h1>
-                <p className="detail-tagline">{kegiatan.tagline || "Aksi Nyata Untuk Sesama"}</p>
+            <div className="content-area">
+                <h1 className="main-title">{kegiatan.title}</h1>
+                <h2 className="tagline">{kegiatan.tagline || "Membangun Masa Depan yang Lebih Baik"}</h2>
+              
+                <section className="summary-section">
+                    <img 
+                        src={kegiatan.image_url || 'https://via.placeholder.com/600x400'} 
+                        alt={kegiatan.title} 
+                        className="summary-image" 
+                    />
+                    <p className="description-text">
+                        {kegiatan.description}
+                    </p>
+                </section>
 
-                <div className="info-grid">
-                    <div className="info-card">
-                        <p><strong>Lokasi:</strong> {kegiatan.location}</p>
-                    </div>
-                    <div className="info-card">
-                        <p><strong>Tanggal Pelaksanaan:</strong> {kegiatan.event_day}</p>
-                    </div>
-                    <div className="info-card">
-                        <p><strong>Status:</strong> <span className="status-badge">{kegiatan.status}</span></p>
-                    </div>
-                    {/* Menambahkan informasi tambahan dari database */}
-                    <div className="info-card">
-                        <p><strong>Target Relawan:</strong> {kegiatan.target_volunteer || "-"} Orang</p>
-                    </div>
+                <section className="detail-list">
+                    {detailItems.map((item, index) => (
+                        <div key={index} className="detail-row">
+                            <span className="detail-label">{item.label}:</span>
+                            <span className="detail-value">{item.value}</span>
+                        </div>
+                    ))}
+                </section>
+                
+                <div className="button-footer">
+                    <Link to="/volunteer-terealisasi" className="back-button">
+                        Kembali
+                    </Link>
                 </div>
-
-                <div className="description-box">
-                    <h3>Deskripsi Kegiatan</h3>
-                    <p>{kegiatan.description}</p>
-                </div>
-
-                <Link to="/volunteer-terealisasi" className="btn-back">
-                    Kembali ke Daftar
-                </Link>
             </div>
         </div>
     );
